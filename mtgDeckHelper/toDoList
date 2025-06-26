@@ -1,0 +1,122 @@
+to do:
+-python nauciti gui                 check
+-python spojiti na scryfall api     check
+-u python ucitati cube/podatke      check
+
+based on archetype, think as you build what the deck needs - mana curve, value generators, tempo, synergies, finishers, interaction...
+    - don't get tunnel vision - maybe the deck really needs an extra color
+                              - is it maybe a good time to pivot
+try and consider what cards are disappearing from the pool and find out what other players are building, so as to carve out a niche/be more effective if hate drafting is necessary
+
+necessary adjustment - normalize the dataset for player skill
+                     - figure out how to best adjust for removed and newly added cards. other formats dont have such problems
+
+acknowledge dataset limitations, potentially find an improved method for measuring games that balances usefulness and invasivness
+
+find a way to do online learning, so as to not have to retrain the whole model with every added datapoint
+
+potential avenue: try out Paretto front sorting for card winrates and numbers of decks it appeared in.
+    - varijanta 1: karte podijeliti u tierove na temelju fronte: tier = ukupan broj fronti - fronta
+    -> lagan nacin za dati kartama score
+    - uz to treba nekako uracunati koje karte uzeti na temelju boja i mana curvea i voila - osnovan helper
+
+ako cu raditi preporuke na temelju arhetipa, tj na temelju tagova, potencijalni problem je sto su onda preporuke ogranicene tagovima i bojati ce se eksperimentirati, tako da treba biti jako konzervativan
+
+direktno iz tablica dobiti winrate karata - los plan. potrebno uracunati za vjestinu igraca -> fixed/random/mixed effects models
+    -> fixed effects model za sad, zamisljamo da se vjestina igraca ne mijenja toliko
+    --> nekako dobiti p vrijednosti kako bi se provjerila valjanost rezultata za pojedine karte (p_value<0.05 => mozemo vjerovati iznosu)
+
+bonus za boje: extra bod za svaku drugu draftanu kartu koja dijeli boju s tom kartu
+    -> sto vise vremena je proslo to je bonus vazniji (tj sve je losije za pivotati)
+    -> bonus mozda i dalje nije dosta da se odabere karta tih boja,
+        sto bi moglo implicirati da cak i ako ne igramo tu boju, mozda se isplati uzeti tu kartu da ju netko drugi ne uzme
+
+    --> mozda bi se mogao uvesti i postotni bonus, tj bonus na temelju prijasnje izracunatog rezultata, ali to bi samo cinilo bolje karte boljima, a ne bi puno pomoglo losijima
+
+implementirane Paretto fronte:
+    -otkuda uopce ideja? intuitivno cemo vise vjerovati kartama koje su drugi ljudi vise igrali
+        - matematicki smisao kaze da su metrike tih karata pouzdanije: ako karta ima 100% winrate a odigrana je u samo jednoj partiji, koliko tome zapravo mozemo vjerovati?
+            - no ako karta ima niski winrate, ali i dalje je puno igrana, ne bi smo li onda trebali biti pouzdaniji da je ta karta losa i ne poticati njeno koristenje?
+    - ako karta nije uopce sudjelovala u igri, za base winrate ju automatski stavlja u najlosiji tier
+        -> takve karte drafter vise manje nikad nece odabrati, ali mozda drugi igraci hoce
+    - za FE model, ako  karta jos nikad nije odigrana, base winrate joj je 50%, tako da je moguce da dobije dobru poziciju u frontama
+
+daljnji razvoj - treba bodovanje sinergija, mana curvea, tema/arhetipova, karte za ovu situaciju ili onu, sto protivnici igraju...
+    -> ukljuciti sve jedno po jedno. trebamo bolji plan.
+
+moze se gledati winrate karte protiv druge karte, ali to je nepotrebno jer ideja je da zelimo najbolji generalni winrate
+
+potrebno je promatrati podatke na razini deckova, ne draftova
+    - sto ako je na dva razlicita dana netko napravio identican ili barem jako jako slican deck?
+        -> model ce lose nauciti, u tom slucaju bi se trebalo prosiriti da se gledaju i deckovi protiv kojih je spil igrao
+
+
+nova multikriterijska optimizicija potrebna:
+    - ako je karta puno igrana i ima visoki rezultat, onda odlicno.
+    - ako je karta puno igrana i ima mali winrate, onda ju izbjegavamo.
+    - bez obzira na winrate, ako karta ima nisku stopu koristenja, znaci da je potrebno jos znanja. moguce je takvu promovirati za svrhe eksperimentiranja, ali ju je moguce i odbaciti
+        jer nismo pouzdani u njenu korist
+
+bilokoja multikriterijska optimizacija pada u vodu kad se sjetimo da je rijec o kompleksnom sustavu gdje karte ne mozemo promatrati u vakuumu -
+- probali smo s FE modelom i dosli do zakljucka da nema dostatna kolicina podataka da se donese takva prosudba
+-> cak i da FE model radi, karte su cesto dobre upravo jer dobro funkcioniraju s drugim kartama, a ne jer su pojedinacno jake
+
+ideja: matrica dizajna koja osim pojedinacnih karata ima i kombinaciju dviju, tri ili koliko god karata
+-> veeeeliki problem: matrica dizajna bi postala ogromna, sa svakom kombinacijom raste potreba za podatcima
+
+proba: dodatni bodovi za cestu boju nisu zapravo puno pomogli. broj igara/deckova u kojima su karte sudjelovale su bile jako utjecajne na broj bodova koji karta dobije
+    sakupljene karte bile su razbacane po arhetipovima i stilovima igre. deck nije bio kohezivan
+
+novi plan: prebaciti karte u vektorski prostor tako da su karte koje su povijesno bile skupa u deckovima koji su dobro radili blizu,
+            dok su karte koje povijesno nisu skupa igrane ili su skupa bile lose udaljenije
+
+vektorski prostor radi puno bolje za predlaganje, ali nije moguce slijepo se pouzdati u te rezultate - sto je blizu modernih vec postojecih alata
+
+ulazni prostor raste kako se azurira cube, ili ako bi se gledali deckovi van cubea. Postoji li nacin drzati input space konzistentne velicine?
+
+ideja za smanjenje ulaznog prostora: dictionary based coding - za svaki deck spremimo dictionary gdje su kljucevi prisutne karte, a vrijednosti broj pojava te karte u decku
+                                                             - smanjujemo potrebu za memorijom, ali je potrebno to pretvarati u vrijednosti prilikom ucitavanja podatka u neuronku
+                                                             - i dalje ne omogucuje on-line ucenje jer treba s novim kartama prosiriti neuronku
+                                     feature hashing - zada se unaprijed broj featurea, postojece feature se zatim pretoci u te feature
+                                                     - hash funkcija se moze napraviti na temelju boja karata i/ili tagova dodijeljenim kartama u cubeu
+                                                     - moguce on-line ucenje
+                                                     - karte van cubea nemaju tagove kao u cubeu, a cak se i za starije karte u cubeu trebaju spremiti tagovi, i trebaju se spremati podatci o boji, i svi ostali metapodatci...
+                                                     - moguce mozda napraviti embedding na temelju teksta karata, ali to vec postaje jako nespretno i unistava svrhu projekta polako
+                                     izrezivanje karata koje su se pojavile malen broj puta - ako se karta pojavila 0 ili 1 put ukupno u svim deckovima (ili je u manje od 2% deckova ili neki slican threshold), onda je nerelevantna i mozemo ju ignorirati
+                                                                                            - nazalost je metoda lossy, ali ako se karta pojavila svega par puta, onda ionako nije statisticki relevantna
+                                                                                            - moze potencijalno znacajno smanjiti broj featurea, za sto smo ocajni ako se broj featurea priblizi 10000
+                                                                                            - i dalje nije moguce raditi on-line ucenje
+
+ako dimenzija prostora ugradjivanja ovisi o dimenziji ulaznog prostora, onda je prevelik ulazni prostor osuda za model, jer ce ocajno generalizirati i metrike nece znaciti nista
+    -> dodatno, ako iznova racunamo udaljenosti, sa svakom ekstra dimenzijom je to sve sporije
+
+dodatna opcija - predtrenirati na vanjskim podatcima, napraviti specificno treniranje na podatcima iz cube
+ - kako to izvesti, a da se usklade featurei? sto ako su se neke karte pojavile u cubeu, a ne u vanjskim podatcima, ili su te karte izrezane?
+
+postoji li nacin da provjerimo embedding karata koje nisu u skupu za treniranje, tj koje su novododane, cisto da ne moramo siriti ulazni prostor nepotrebno?
+- ionako ne embeddamo podatke karte, tako da je moguce kompletno izvaditi te karte iz ulaznog prostora
+- mozda neki default odgovor baziran na boji/tipu karte...
+
+
+glupo je dodati svaki vanjski skup podataka. npr nema nijedna karta iz tdm seta, tako da nema smisla trenirati nad njim.
+najvise cube karata je prisutno u j25, ali nema skupa podataka za taj set. iduca najbolja stvar je neo.
+
+
+Ideja za dodatnu mogućnost helpera: prikazati specifične karte s kojima se karta dobro kombinira, ne samo ukupan rezultat za kako paše u špil
+još bolje - prikazati različite metrike, da ocjena ne bude jednodimenzionalna (ne doslovno), već da igrač bolje razumije zašto je nešto dobro ili ne
+
+Detaljno opisi zasto je manjak podataka problematican - nepouzdani podatci, neka kartu koja je odigrana jednom se cini ocajna...
+                                                      - takodjer, podatci su jako biased prema ogracima - ako igraci ne zele nesto igrati tj nema podataka o nekoj kombinaciji...
+
+Nova varijanta neuronke za ugradjivanje: tretira sve kao regresiju i koristi MSE gubitak. Kako bi se gradio deck, za svaku novu kartu moze izracunati koji bi bio "winrate" decka
+        - problem je sto jedna do dve karte nece sacinjavati deck te taj rezultat ne bi puno znacio, a kasnije nije dobro ukljucivati sve karte jer pravi deckovi nemaju toliko karata. podatci ne znace nista tako
+
+da se vratimo nazad u osnovem, dodaj za dodatne bodove k, tj da se dodaje k bodova, a ne samo 1, prati promjenu u rezultatima (recimo k=1,2, 5, 10...)
+postavljanje rezultata FE modela na int je cudno jer neki brojevi su u redu velicine 10^-1, a drugi u redu velicine 10^-17
+
+mozda da metoda 1 gleda koja je po redu odabrana karta, ne samo je li uzeta ili ne. mozda ce usporedba bolje ici
+    -ali opet, mozda bolje ne jer ne zelimo da bude blizu vrha, zelimo da bude na vrhu
+    -bolje ne jer ako podatci favoritiziraju neki arhetip, onda je to jako lose
+
+Za color_bonus se vidi da je i mali bonus daleko bolji nego nikakav
+No stvari su cudne za color_bonus u rangu [1, 10]. Poslije toga generalno pocinje opadati

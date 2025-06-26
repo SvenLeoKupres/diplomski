@@ -1,0 +1,361 @@
+name,CMC,Type,Color,Set,Collector Number,Rarity,Color Category,status,Finish,maybeboard,image URL,image Back URL,tags,Notes,MTGO ID
+"Arcbound Javelineer",1,"Artifact Creature - Soldier",W,"mh2","2",uncommon,White,Owned,Non-foil,false,,,"WG Counters;WU Artifacts","",90373
+"Dauntless Bodyguard",1,"Creature - Human Knight",W,"plst","DOM-14",uncommon,White,Owned,Non-foil,false,,,"WR Voltron;WR Aggro","",
+"Enduring Bondwarden",1,"Creature - Human Scout",W,"mom","14",common,White,Owned,Non-foil,false,,,"WG Counters;WB Blink","",109824
+"Giant Killer",1,"Creature - Human Peasant",W,"eld","275",rare,White,Owned,Non-foil,false,,,"Removal;Card Advantage","",
+"Hopeful Initiate",1,"Creature - Human Warlock",W,"vow","20",rare,White,Owned,Non-foil,false,,,"WG Counters","",94328
+"Hotshot Mechanic",1,"Artifact Creature - Fox Pilot",W,"j22","193",uncommon,White,Owned,Non-foil,false,,,"WU Artifacts","",
+"Monk of the Open Hand",1,"Creature - Elf Monk",W,"afr","25",uncommon,White,Owned,Non-foil,false,,,"","",91552
+"Nurturing Pixie",1,"Creature - Faerie Rogue",W,"otj","20",uncommon,White,Owned,Non-foil,false,,,"WB Blink;WG Counters","",123951
+"Thraben Inspector",1,"Creature - Human Soldier",W,"soi","44",common,White,Owned,Non-foil,false,,,"Card Advantage;WU Artifacts;WB Blink","",60240
+"Cathar Commando",2,"Creature - Human Soldier",W,"mid","10",common,White,Owned,Non-foil,false,,,"WR Aggro;Removal","",92942
+"Charming Prince",2,"Creature - Human Noble",W,"plst","ELD-8",rare,White,Owned,Non-foil,false,,,"WB Blink;WR Aggro","",
+"Ethersworn Canonist",2,"Artifact Creature - Human Cleric",W,"2xm","14",rare,White,Owned,Non-foil,false,,,"WU Artifacts","",82062
+"Fearless Fledgling",2,"Creature - Griffin",W,"znr","15",uncommon,White,Owned,Non-foil,false,,,"WG Counters;WR Aggro","",82967
+"Ingenious Smith",2,"Creature - Human Artificer",W,"afr","21",uncommon,White,Owned,Non-foil,false,,,"WU Artifacts;WR Voltron;WG Counters;Card Advantage","",91544
+"Lion Sash",2,"Artifact Creature - Equipment Cat",W,"neo","26",rare,White,Owned,Non-foil,false,,,"WR Voltron;WG Counters;WU Artifacts","",96962
+"Luminarch Aspirant",2,"Creature - Human Cleric",W,"ncc","205",rare,White,Owned,Non-foil,false,,,"WR Aggro;WR Voltron;WG Counters;WU Artifacts","",
+"Mikaeus, the Lunarch",2,"Legendary Creature - Human Cleric",W,"j25","225",mythic,White,Owned,Non-foil,false,,,"WG Counters","",
+"Phelia, Exuberant Shepherd",2,"Legendary Creature - Dog",W,"mh3","40",rare,White,Owned,Non-foil,false,,,"WB Blink;WG Counters","",126097
+"Puresteel Paladin",2,"Creature - Human Knight",W,"plst","NPH-20",rare,White,Owned,Non-foil,false,,,"WR Voltron","",
+"Selfless Spirit",2,"Creature - Spirit Cleric",W,"emn","40",rare,White,Owned,Non-foil,false,,,"Protection;WR Aggro;WR Voltron","",61102
+"Spirited Companion",2,"Enchantment Creature - Dog",W,"j25","256",common,White,Owned,Non-foil,false,,,"WB Blink;Card Advantage","",
+"Annex Sentry",3,"Artifact Creature - Phyrexian Cleric",W,"one","2",uncommon,White,Owned,Non-foil,false,,,"WU Artifacts;Removal","",106167
+"Blade Splicer",3,"Creature - Phyrexian Human Artificer",W,"blc","136",rare,White,Owned,Non-foil,false,,,"WU Artifacts;WB Blink;WR Aggro","",128413
+"Danitha Capashen, Paragon",3,"Legendary Creature - Human Knight",W,"woc","64",uncommon,White,Owned,Non-foil,false,,,"","",117040
+"Digsite Engineer",3,"Creature - Dwarf Artificer",W,"c21","15",rare,White,Owned,Non-foil,false,,,"WU Artifacts;WR Voltron","",89773
+"Flickerwisp",3,"Creature - Elemental",W,"plst","EVE-6",uncommon,White,Owned,Non-foil,false,,,"WB Blink","",
+"Fortune, Loyal Steed",3,"Legendary Creature - Beast Mount",W,"otj","12",rare,White,Owned,Non-foil,false,,,"WB Blink","",123935
+"Guardian of Ghirapur",3,"Creature - Angel",W,"mom","16",rare,White,Owned,Non-foil,false,,,"WB Blink","",109828
+"Felidar Guardian",4,"Creature - Cat Beast",W,"plst","AER-19",uncommon,White,Owned,Non-foil,false,,,"WB Blink","",
+"Halvar, God of Battle // Sword of the Realms",4,"Legendary Creature - God",W,"khm","15",mythic,White,Owned,Non-foil,false,,,"WR Voltron","",87349
+"Restoration Angel",4,"Creature - Angel",W,"inr","299",rare,White,Owned,Non-foil,false,,,"WB Blink","",135310
+"Serra Paragon",4,"Creature - Angel",W,"dmu","32",mythic,White,Owned,Non-foil,false,,,"WR Aggro;Card Advantage;WB Blink","",102540
+"Angel of Invention",5,"Creature - Angel",W,"kld","4",mythic,White,Owned,Non-foil,false,,,"WR Aggro;WU Artifacts","",61887
+"Danitha, Benalia's Hope",5,"Legendary Creature - Human Knight",W,"dmu","15",rare,White,Owned,Non-foil,false,,,"WR Voltron","",102506
+"Cloudshift",1,"Instant",W,"jmp","97",common,White,Owned,Non-foil,false,,,"WB Blink;Protection","",
+"Ephemerate",1,"Instant",W,"plst","MH1-7",common,White,Owned,Non-foil,false,,,"WB Blink;Protection","",
+"Loran's Escape",1,"Instant",W,"bro","14",common,White,Owned,Non-foil,false,,,"","",104646
+"Flicker of Fate",2,"Instant",W,"thb","16",common,White,Owned,Non-foil,false,,,"WB Blink;Protection","",79156
+"Parting Gust",2,"Instant",W,"blb","24",uncommon,White,Owned,Non-foil,false,,,"Removal;Protection;WG Counters;WB Blink","",129293
+"You Hear Something on Watch",2,"Instant",W,"afr","42",common,White,Owned,Non-foil,false,,,"WR Aggro;Removal;WU Artifacts","",91586
+"Eerie Interlude",3,"Instant",W,"khc","22",rare,White,Owned,Non-foil,false,,,"Protection;WB Blink","",87949
+"Ancestral Blade",2,"Artifact - Equipment",W,"m20","3",uncommon,White,Owned,Non-foil,false,,,"WR Voltron;WR Aggro","",72905
+"Barbed Spike",2,"Artifact - Equipment",W,"plst","MH2-5",uncommon,White,Owned,Non-foil,false,,,"WR Voltron;WU Artifacts;WR Aggro","",
+"Dancing Sword",2,"Artifact - Equipment",W,"afr","360",rare,White,Owned,Non-foil,false,,,"WR Voltron;WU Artifacts","",
+"Glass Casket",2,"Artifact",W,"eld","15",uncommon,White,Owned,Non-foil,false,,,"Removal;WU Artifacts","",78122
+"Greatsword of Tyr",2,"Artifact - Equipment",W,"clb","22",common,White,Owned,Non-foil,false,,,"WR Voltron;WG Counters","",100036
+"Maul of the Skyclaves",3,"Artifact - Equipment",W,"znr","27",rare,White,Owned,Non-foil,false,,,"WR Voltron;WR Aggro","",82995
+"Tempered Steel",3,"Enchantment",W,"2xm","34",rare,White,Owned,Non-foil,false,,,"WU Artifacts","",82102
+"Touch the Spirit Realm",3,"Enchantment",W,"neo","40",uncommon,White,Owned,Non-foil,false,,,"WB Blink;Removal;Protection","",96994
+"Teleportation Circle",4,"Enchantment",W,"afr","39",rare,White,Owned,Non-foil,false,,,"WB Blink","",91580
+"Faerie Seer",1,"Creature - Faerie Wizard",U,"mh1","51",common,Blue,Owned,Non-foil,false,,,"UB Ninjas","",72474
+"Network Disruptor",1,"Artifact Creature - Moonfolk Rogue",U,"j25","334",common,Blue,Owned,Non-foil,false,,,"UB Ninjas;WU Artifacts","",
+"Silver Raven",1,"Artifact Creature - Bird",U,"afr","74",common,Blue,Owned,Non-foil,false,,,"WU Artifacts;UB Ninjas","",91650
+"Siren Stormtamer",1,"Creature - Siren Pirate Wizard",U,"xln","79",uncommon,Blue,Owned,Non-foil,false,,,"UB Ninjas;Protection","",65172
+"Spectral Sailor",1,"Creature - Spirit Pirate",U,"m20","76",uncommon,Blue,Owned,Non-foil,false,,,"UB Ninjas;Card Advantage;UG Flash","",73051
+"Thousand-Faced Shadow",1,"Creature - Human Ninja",U,"neo","86",rare,Blue,Owned,Non-foil,false,,,"UB Ninjas","",97092
+"Baral, Chief of Compliance",2,"Legendary Creature - Human Wizard",U,"aer","28",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control","",62653
+"Brineborn Cutthroat",2,"Creature - Merfolk Pirate",U,"j25","291",uncommon,Blue,Owned,Non-foil,false,,,"UG Flash","",
+"Etherium Sculptor",2,"Artifact Creature - Vedalken Artificer",U,"c16","89",common,Blue,Owned,Non-foil,false,,,"WU Artifacts","",
+"Harbinger of the Tides",2,"Creature - Merfolk Wizard",U,"j22","306",rare,Blue,Owned,Non-foil,false,,,"UG Flash;Removal","",
+"Hypnotic Sprite",2,"Creature - Faerie",U,"eld","49",uncommon,Blue,Owned,Non-foil,false,,,"UB Ninjas;Removal;UB Control","",78204
+"Mercurial Spelldancer",2,"Creature - Phyrexian Rogue",U,"one","61",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control;UB Ninjas","",106337
+"Moon-Circuit Hacker",2,"Enchantment Creature - Human Ninja",U,"neo","67",common,Blue,Owned,Non-foil,false,,,"UB Ninjas;Card Advantage","",97054
+"Thieving Skydiver",2,"Creature - Merfolk Rogue",U,"znr","85",rare,Blue,Owned,Non-foil,false,,,"Removal;UB Ninjas","",83127
+"Thing in the Ice",2,"Creature - Horror",U,"soi","92",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control","",59868
+"Brazen Borrower",3,"Creature - Faerie Rogue",U,"eld","39",mythic,Blue,Owned,Non-foil,false,,,"UB Ninjas;Removal;Card Advantage;UG Flash;UR Spellslinger;UB Control","",78180
+"Chrome Host Seedshark",3,"Creature - Phyrexian Shark",U,"mom","51",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control","",109916
+"Haughty Djinn",3,"Creature - Djinn",U,"dmu","52",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control","",102580
+"Kappa Cannoneer",3,"Artifact Creature - Turtle Warrior",U,"mh3","270",rare,Blue,Owned,Non-foil,false,,,"WU Artifacts","",125951
+"Master of Etherium",3,"Artifact Creature - Vedalken Wizard",U,"moc","226",rare,Blue,Owned,Non-foil,false,,,"WU Artifacts","",110900
+"Mist-Syndicate Naga",3,"Creature - Snake Ninja",U,"mh1","58",rare,Blue,Owned,Non-foil,false,,,"UB Ninjas","",72488
+"Prosperous Thief",3,"Creature - Human Ninja",U,"neo","73",uncommon,Blue,Owned,Non-foil,false,,,"UB Ninjas","",97066
+"Thought Monitor",3,"Artifact Creature - Construct",U,"j25","373",rare,Blue,Owned,Non-foil,false,,,"WU Artifacts","",
+"Filigree Attendant",4,"Artifact Creature - Homunculus",U,"j25","312",uncommon,Blue,Owned,Non-foil,false,,,"WU Artifacts","",
+"God-Eternal Kefnet",4,"Legendary Creature - Zombie God",U,"war","53",mythic,Blue,Owned,Non-foil,false,,,"UB Control;UR Spellslinger","",71712
+"High Fae Trickster",4,"Creature - Faerie Wizard",U,"fdn","40",rare,Blue,Owned,Non-foil,false,,,"UG Flash","",133648
+"Ninja of the Deep Hours",4,"Creature - Human Ninja",U,"bok","44",common,Blue,Owned,Non-foil,false,,,"UB Ninjas","",21827
+"Sphinx of Forgotten Lore",4,"Creature - Sphinx",U,"fdn","51",mythic,Blue,Owned,Non-foil,false,,,"UG Flash;UR Spellslinger;UB Control","",133670
+"Venser, Shaper Savant",4,"Legendary Creature - Human Wizard",U,"j25","66",rare,Blue,Owned,Non-foil,false,,,"UG Flash;UB Control","",132710
+"Teferi, Mage of Zhalfir",5,"Legendary Creature - Human Wizard",U,"tsr","91",rare,Blue,Owned,Non-foil,false,,,"UG Flash","",86545
+"Voracious Greatshark",5,"Creature - Shark",U,"j25","382",rare,Blue,Owned,Non-foil,false,,,"UB Control;UG Flash","",
+"Horned Loch-Whale",6,"Creature - Whale",U,"woe","53",rare,Blue,Owned,Non-foil,false,,,"UG Flash;UR Spellslinger;UB Control;Card Advantage","",116406
+"Torrential Gearhulk",6,"Artifact Creature - Construct",U,"kld","67",mythic,Blue,Owned,Non-foil,false,,,"UB Control;UG Flash;UR Spellslinger","",61917
+"Brainstorm",1,"Instant",U,"c21","115",common,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UG Flash;UB Control","",89331
+"Fading Hope",1,"Instant",U,"j25","310",uncommon,Blue,Owned,Non-foil,false,,,"UB Control;UR Spellslinger;UG Flash","",
+"Opt",1,"Instant",U,"sta","19",uncommon,Blue,Owned,Non-foil,false,,,"UR Spellslinger","",89095
+"Spell Pierce",1,"Instant",U,"xln","81",common,Blue,Owned,Non-foil,false,,,"WU Artifacts;Protection","",65176
+"Counterspell",2,"Instant",U,"sta","15",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UB Control;UG Flash;Removal","",89087
+"Essence Scatter",2,"Instant",U,"dmu","49",common,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Removal;UG Flash;UB Control","",102574
+"Ertai's Scorn",3,"Instant",U,"dmu","48",uncommon,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Removal;UG Flash;UB Control","",102572
+"Saw It Coming",3,"Instant",U,"khm","76",uncommon,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Removal;UG Flash;UB Control","",87479
+"Thirst for Discovery",3,"Instant",U,"vow","85",uncommon,Blue,Owned,Non-foil,false,,,"UG Flash;UR Spellslinger;Card Advantage","",94486
+"Meeting of Minds",4,"Instant",U,"mom","66",common,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Card Advantage;UG Flash","",109956
+"Memory Deluge",4,"Instant",U,"inr","75",rare,Blue,Owned,Non-foil,false,,,"UG Flash;UR Spellslinger;Card Advantage","",135532
+"Rewind",4,"Instant",U,"m21","63",uncommon,Blue,Owned,Non-foil,false,,,"Removal;UG Flash","",81353
+"Aetherspouts",5,"Instant",U,"m15","44",rare,Blue,Owned,Non-foil,false,,,"Removal","",53542
+"Mystic Confluence",5,"Instant",U,"c15","14",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Removal;Card Advantage;UG Flash;UB Control","",
+"Sublime Epiphany",6,"Instant",U,"m21","74",rare,Blue,Owned,Non-foil,false,,,"UG Flash;UR Spellslinger;UB Control;Removal;Card Advantage","",81375
+"Dig Through Time",8,"Instant",U,"ktk","36",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;Card Advantage;UG Flash","",54316
+"Inspired Idea",3,"Sorcery",U,"vow","64",rare,Blue,Owned,Non-foil,false,,,"Card Advantage;UR Spellslinger","",94434
+"Shark Typhoon",6,"Enchantment",U,"dsc","127",rare,Blue,Owned,Non-foil,false,,,"UR Spellslinger;UG Flash;UB Control","",130877
+"Battlefly Swarm",1,"Creature - Phyrexian Insect",B,"dmu","81",common,Black,Owned,Non-foil,false,,,"UB Ninjas","",102638
+"Bloodsoaked Champion",1,"Creature - Human Warrior",B,"ktk","66",rare,Black,Owned,Non-foil,false,,,"BR Aggro","",54172
+"Changeling Outcast",1,"Creature - Shapeshifter",B,"mh1","82",common,Black,Owned,Non-foil,false,,,"UB Ninjas","",72536
+"Knight of the Ebon Legion",1,"Creature - Vampire Knight",B,"m20","105",rare,Black,Owned,Non-foil,false,,,"BR Aggro","",73109
+"Vampire of the Dire Moon",1,"Creature - Vampire",B,"j25","504",uncommon,Black,Owned,Non-foil,false,,,"BG Lifegain;UB Ninjas","",
+"Ayara's Oathsworn",2,"Creature - Human Knight",B,"mat","11",rare,Black,Owned,Non-foil,false,,,"","",109144
+"Dokuchi Silencer",2,"Creature - Human Ninja",B,"neo","95",uncommon,Black,Owned,Non-foil,false,,,"UB Ninjas","",97110
+"Elderfang Disciple",2,"Creature - Elf Cleric",B,"j25","432",common,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro;UB Ninjas","",
+"Ghastly Gloomhunter",2,"Creature - Zombie Bat",B,"znr","103",common,Black,Owned,Non-foil,false,,,"UB Ninjas;BG Lifegain","",83169
+"Nezumi Prowler",2,"Artifact Creature - Rat Ninja",B,"neo","116",uncommon,Black,Owned,Non-foil,false,,,"UB Ninjas;BG Lifegain","",97156
+"Nullpriest of Oblivion",2,"Creature - Vampire Cleric",B,"j25","472",rare,Black,Owned,Non-foil,false,,,"BG Lifegain;UB Ninjas","",
+"Tenacious Underdog",2,"Creature - Human Warrior",B,"snc","97",rare,Black,Owned,Non-foil,false,,,"BR Aggro;Card Advantage;UB Control","",98413
+"The Raven Man",2,"Legendary Creature - Human Wizard",B,"dmu","103",rare,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro","",102682
+"Tinybones, Bauble Burglar",2,"Legendary Creature - Skeleton Rogue",B,"fdn","72",rare,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro","",133712
+"Virus Beetle",2,"Artifact Creature - Insect",B,"j25","509",common,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro;UB Ninjas","",
+"Biting-Palm Ninja",3,"Creature - Human Ninja",B,"neo","88",rare,Black,Owned,Non-foil,false,,,"UB Ninjas;WB Blink;BR Aggro","",97096
+"Bloodthirsty Aerialist",3,"Creature - Vampire Rogue",B,"m20","91",uncommon,Black,Owned,Non-foil,false,,,"BG Lifegain","",73081
+"Gumdrop Poisoner",3,"Creature - Human Warlock",B,"woe","93",rare,Black,Owned,Non-foil,false,,,"BG Lifegain;UB Control;WB Blink","",116500
+"Murderous Rider",3,"Creature - Zombie Knight",B,"eld","97",rare,Black,Owned,Non-foil,false,,,"BG Lifegain;Removal;Card Advantage;UB Control","",78308
+"Nighthawk Scavenger",3,"Creature - Vampire Rogue",B,"znr","115",rare,Black,Owned,Non-foil,false,,,"BG Lifegain;BR Aggro","",83197
+"Qarsi Revenant",3,"Creature - Vampire",B,"tdm","86",rare,Black,Owned,Non-foil,false,,,"","",139123
+"Thought-Stalker Warlock",3,"Creature - Lizard Warlock",B,"blb","118",uncommon,Black,Owned,Non-foil,false,,,"BR Aggro;WB Blink","",129481
+"Vito, Thorn of the Dusk Rose",3,"Legendary Creature - Vampire Cleric",B,"m21","127",rare,Black,Owned,Non-foil,false,,,"BG Lifegain","",81481
+"Azra Smokeshaper",4,"Creature - Azra Ninja",B,"mh1","79",common,Black,Owned,Non-foil,false,,,"UB Ninjas","",72530
+"Ebondeath, Dracolich",4,"Legendary Creature - Zombie Dragon",B,"afr","100",mythic,Black,Owned,Non-foil,false,,,"UB Control;BR Aggro","",91702
+"Fell Specter",4,"Creature - Specter",B,"plst","M19-96",uncommon,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro","",
+"Gonti, Lord of Luxury",4,"Legendary Creature - Aetherborn Rogue",B,"otc","135",rare,Black,Owned,Non-foil,false,,,"WB Blink;Card Advantage","",124729
+"Hostile Investigator",4,"Creature - Ogre Rogue Detective",B,"big","10",mythic,Black,Owned,Non-foil,false,,,"BR Aggro;WB Blink;Card Advantage","",125381
+"Mukotai Ambusher",4,"Artifact Creature - Rat Ninja",B,"neo","112",common,Black,Owned,Non-foil,false,,,"BG Lifegain;UB Ninjas","",97148
+"Ravenous Chupacabra",4,"Creature - Beast Horror",B,"rix","82",uncommon,Black,Owned,Non-foil,false,,,"Removal;WB Blink;BR Aggro;UB Control","",66617
+"Aclazotz, Deepest Betrayal",5,"Legendary Creature - Bat God",B,"lci","88",mythic,Black,Owned,Non-foil,false,,,"BR Aggro;BG Lifegain;WB Blink","",117978
+"Tivash, Gloom Summoner",5,"Legendary Creature - Human Warlock",B,"c21","45",rare,Black,Owned,Non-foil,false,,,"BG Lifegain","",89833
+"Witch of the Moors",5,"Creature - Human Warlock",B,"jmp","18",rare,Black,Owned,Non-foil,false,,,"BG Lifegain","",81783
+"Noxious Gearhulk",6,"Artifact Creature - Construct",B,"tdc","191",mythic,Black,Owned,Non-foil,false,,,"BG Lifegain;WB Blink","",138319
+"Vein Ripper",6,"Creature - Vampire Assassin",B,"mkm","110",mythic,Black,Owned,Non-foil,false,,,"UB Control;BG Lifegain","",121698
+"Cut Down",1,"Instant",B,"dmu","89",uncommon,Black,Owned,Non-foil,false,,,"Removal;UB Control","",102654
+"Dark Ritual",1,"Instant",B,"a25","82",common,Black,Owned,Non-foil,false,,,"UB Ninjas;BG Lifegain;UB Control","",67078
+"Feign Death",1,"Instant",B,"afr","103",common,Black,Owned,Non-foil,false,,,"Protection","",91708
+"Candy Grapple",2,"Instant",B,"woe","83",common,Black,Owned,Non-foil,false,,,"Removal;UB Control;BG Lifegain","",116476
+"Infernal Grasp",2,"Instant",B,"mid","107",uncommon,Black,Owned,Non-foil,false,,,"Removal;UB Control","",93174
+"Poison the Cup",3,"Instant",B,"khm","103",uncommon,Black,Owned,Non-foil,false,,,"Removal;UB Control","",87535
+"Baleful Mastery",4,"Instant",B,"stx","64",rare,Black,Owned,Non-foil,false,,,"Removal;UB Control","",88605
+"Bloodchief's Thirst",1,"Sorcery",B,"znr","94",uncommon,Black,Owned,Non-foil,false,,,"Removal;UB Control","",83151
+"Divest",1,"Sorcery",B,"dom","87",common,Black,Owned,Non-foil,false,,,"BR Aggro;UB Control;Removal;WB Blink","",67639
+"Thoughtseize",1,"Sorcery",B,"lrw","145",rare,Black,Owned,Non-foil,false,,,"BR Aggro;Removal;WB Blink;UB Control","",28269
+"Fell",2,"Sorcery",B,"blb","95",uncommon,Black,Owned,Non-foil,false,,,"UB Control;Removal","",129435
+"Drill Bit",3,"Sorcery",B,"rna","73",uncommon,Black,Owned,Non-foil,false,,,"BR Aggro;Removal;WB Blink","",71146
+"Crippling Fear",4,"Sorcery",B,"khm","82",rare,Black,Owned,Non-foil,false,,,"Removal;UB Control","",87491
+"Lich-Knights' Conquest",5,"Sorcery",B,"woe","96",rare,Black,Owned,Non-foil,false,,,"BG Lifegain","",116508
+"Bandit's Talent",2,"Enchantment - Class",B,"blb","83",uncommon,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro","",129411
+"Waste Not",2,"Enchantment",B,"wot","38",rare,Black,Owned,Non-foil,false,,,"WB Blink;BR Aggro","",115900
+"Fervent Champion",1,"Creature - Human Knight",R,"eld","124",rare,Red,Owned,Non-foil,false,,,"BR Aggro;WR Aggro;WR Voltron","",78374
+"Greasewrench Goblin",1,"Creature - Goblin Artificer",R,"dft","132",uncommon,Red,Owned,Non-foil,false,,,"RG Midrange;BR Aggro;WR Aggro","",136387
+"Hired Claw",1,"Creature - Lizard Mercenary",R,"blb","140",rare,Red,Owned,Non-foil,false,,,"RG Midrange;WR Aggro;BR Aggro","",129525
+"Marauding Mako",1,"Creature - Shark Pirate",R,"dft","138",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",136399
+"Monastery Swiftspear",1,"Creature - Human Monk",R,"ktk","118",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;UR Spellslinger;BR Aggro;RG Midrange","",54108
+"Norin, Swift Survivalist",1,"Legendary Creature - Human Coward",R,"dsk","297",uncommon,Red,Owned,Non-foil,false,,,"BR Aggro;WR Aggro","",129961
+"Phoenix Chick",1,"Creature - Phoenix",R,"dmu","140",uncommon,Red,Owned,Non-foil,false,,,"RG Midrange;WR Aggro;BR Aggro","",102756
+"Rabbit Battery",1,"Artifact Creature - Equipment Rabbit",R,"neo","157",uncommon,Red,Owned,Non-foil,false,,,"WR Voltron;WR Aggro;BR Aggro","",97246
+"Reinforced Ronin",1,"Artifact Creature - Human Samurai",R,"neo","323",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",
+"Champion of the Flame",2,"Creature - Human Warrior",R,"dom","116",uncommon,Red,Owned,Non-foil,false,,,"WR Voltron","",67697
+"Draconautics Engineer",2,"Creature - Goblin Artificer",R,"dft","121",rare,Red,Owned,Non-foil,false,,,"RG Midrange;WR Aggro;BR Aggro","",136365
+"Dreadhorde Arcanist",2,"Creature - Zombie Wizard",R,"j25","539",rare,Red,Owned,Non-foil,false,,,"UR Spellslinger;WR Aggro;BR Aggro","",
+"Electrostatic Infantry",2,"Creature - Dwarf Wizard",R,"dmu","122",uncommon,Red,Owned,Non-foil,false,,,"UR Spellslinger","",102720
+"Goblin Bushwhacker",2,"Creature - Goblin Warrior",R,"zen","125",common,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",34388
+"Goro-Goro, Disciple of Ryusei",2,"Legendary Creature - Goblin Samurai",R,"neo","145",rare,Red,Owned,Non-foil,false,,,"WR Aggro;WR Voltron;BR Aggro;RG Midrange","",97220
+"Inti, Seneschal of the Sun",2,"Legendary Creature - Human Knight",R,"lci","156",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",118132
+"Lizard Blades",2,"Artifact Creature - Equipment Lizard",R,"neo","153",rare,Red,Owned,Non-foil,false,,,"WR Voltron;WR Aggro;BR Aggro;RG Midrange","",97238
+"Party Thrasher",2,"Creature - Lizard Wizard",R,"mh3","129",rare,Red,Owned,Non-foil,false,,,"BR Aggro;RG Midrange;UR Spellslinger","",126275
+"Radha's Firebrand",2,"Creature - Human Warrior",R,"dmu","141",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",102758
+"Reckless Bushwhacker",2,"Creature - Goblin Warrior Ally",R,"ogw","116",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",59273
+"Young Pyromancer",2,"Creature - Human Shaman",R,"jmp","372",uncommon,Red,Owned,Non-foil,false,,,"UR Spellslinger","",
+"Bonecrusher Giant",3,"Creature - Giant",R,"eld","115",rare,Red,Owned,Non-foil,false,,,"WR Aggro;UR Spellslinger;BR Aggro;RG Midrange;Removal;Card Advantage","",78352
+"Combat Celebrant",3,"Creature - Human Warrior",R,"j25","531",mythic,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",
+"Laelia, the Blade Reforged",3,"Legendary Creature - Spirit Warrior",R,"clb","801",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange;Card Advantage;WR Voltron","",101148
+"Prophetic Flamespeaker",3,"Creature - Human Shaman",R,"jou","106",mythic,Red,Owned,Non-foil,false,,,"RG Midrange;WR Voltron;BR Aggro;WR Aggro;Card Advantage","",52288
+"Squee, Dubious Monarch",3,"Legendary Creature - Goblin Noble",R,"dmu","146",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",102768
+"Flametongue Kavu",4,"Creature - Kavu",R,"dmr","432",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;Removal","",108093
+"Hazoret the Fervent",4,"Legendary Creature - God",R,"akh","136",mythic,Red,Owned,Non-foil,false,,,"WR Aggro;WR Voltron;BR Aggro;RG Midrange","",63874
+"Hellrider",4,"Creature - Devil",R,"dka","93",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange","",43185
+"Manaform Hellkite",4,"Creature - Dragon",R,"vow","170",mythic,Red,Owned,Non-foil,false,,,"UR Spellslinger","",94684
+"Shivan Devastator",4,"Creature - Dragon Hydra",R,"dmu","143",mythic,Red,Owned,Non-foil,false,,,"","",102762
+"Glorybringer",5,"Creature - Dragon",R,"akh","134",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange;Removal","",63870
+"Infuriate",1,"Instant",R,"sta","41",uncommon,Red,Owned,Non-foil,false,,,"WR Voltron;BR Aggro;WR Aggro","",89139
+"Lightning Bolt",1,"Instant",R,"plst","A25-141",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;UR Spellslinger;BR Aggro;RG Midrange;Removal","",
+"Play with Fire",1,"Instant",R,"mid","154",uncommon,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;UR Spellslinger;Removal;RG Midrange","",93280
+"Shock",1,"Instant",R,"aer","98",common,Red,Owned,Non-foil,false,,,"WR Aggro;UR Spellslinger;BR Aggro;RG Midrange;Removal","",62923
+"Abrade",2,"Instant",R,"hou","83",uncommon,Red,Owned,Non-foil,false,,,"UR Spellslinger;RG Midrange;Removal","",64650
+"Galvanize",2,"Instant",R,"mkm","128",common,Red,Owned,Non-foil,false,,,"UR Spellslinger;RG Midrange;Removal","",121734
+"Lightning Strike",2,"Instant",R,"dmu","137",common,Red,Owned,Non-foil,false,,,"UR Spellslinger;Removal;RG Midrange","",102750
+"Twinferno",2,"Instant",R,"dmu","149",uncommon,Red,Owned,Non-foil,false,,,"UR Spellslinger;WR Voltron","",102774
+"Unleash Fury",2,"Instant",R,"m21","170",uncommon,Red,Owned,Non-foil,false,,,"WR Voltron;RG Midrange","",81567
+"You Come to the Gnoll Camp",2,"Instant",R,"afr","168",common,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;WR Voltron;RG Midrange","",91838
+"Mizzium Mortars",2,"Sorcery",R,"clb","803",rare,Red,Owned,Non-foil,false,,,"UR Spellslinger;Removal;RG Midrange","",101152
+"Reckless Impulse",2,"Sorcery",R,"vow","174",common,Red,Owned,Non-foil,false,,,"UR Spellslinger;BR Aggro;Card Advantage","",94692
+"Shatterskull Smashing // Shatterskull, the Hammer Pass",2,"Sorcery",R,"znr","161",mythic,Red,Owned,Non-foil,false,,,"UR Spellslinger;RG Midrange;Removal","",83297
+"Light Up the Stage",3,"Sorcery",R,"afc","131",uncommon,Red,Owned,Non-foil,false,,,"BR Aggro;Card Advantage;UR Spellslinger","",
+"Skewer the Critics",3,"Sorcery",R,"rna","115",common,Red,Owned,Non-foil,false,,,"UR Spellslinger;WR Aggro;BR Aggro;RG Midrange;Removal","",71230
+"Chain Reaction",4,"Sorcery",R,"wwk","74",rare,Red,Owned,Non-foil,false,,,"UR Spellslinger;Removal","",35637
+"Fiery Confluence",4,"Sorcery",R,"c15","26",rare,Red,Owned,Non-foil,false,,,"WR Aggro;BR Aggro;RG Midrange;UR Spellslinger;Removal","",
+"Dueling Rapier",1,"Artifact - Equipment",R,"afr","140",common,Red,Owned,Non-foil,false,,,"WR Voltron;WR Aggro;BR Aggro","",91782
+"Embercleave",6,"Legendary Artifact - Equipment",R,"eld","120",mythic,Red,Owned,Non-foil,false,,,"WR Aggro;WR Voltron;BR Aggro;RG Midrange","",78364
+"Birds of Paradise",1,"Creature - Bird",G,"rvr","133",rare,Green,Owned,Non-foil,false,,,"UG Flash;RG Midrange;BG Lifegain","",120793
+"Experiment One",1,"Creature - Human Ooze",G,"2x2","146",common,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters","",101776
+"Gilded Goose",1,"Creature - Bird",G,"eld","160",rare,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange;UG Flash","",78458
+"Llanowar Elves",1,"Creature - Elf Druid",G,"m12","182",common,Green,Owned,Non-foil,false,,,"RG Midrange;UG Flash;BG Lifegain","",41605
+"Pelt Collector",1,"Creature - Elf Warrior",G,"grn","141",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",69655
+"Devoted Druid",2,"Creature - Elf Druid",G,"plst","UMA-162",uncommon,Green,Owned,Non-foil,false,,,"UG Flash;RG Midrange;BG Lifegain","",
+"Gala Greeters",2,"Creature - Elf Druid",G,"snc","148",rare,Green,Owned,Non-foil,false,,,"RG Midrange;BG Lifegain;WG Counters;UG Flash","",98515
+"Lotus Cobra",2,"Creature - Snake",G,"zen","168",mythic,Green,Owned,Non-foil,false,,,"RG Midrange;BG Lifegain","",34546
+"Quirion Beastcaller",2,"Creature - Dryad Warrior",G,"dmu","175",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",102826
+"Sakura-Tribe Elder",2,"Creature - Snake Shaman",G,"c15","200",common,Green,Owned,Non-foil,false,,,"RG Midrange;BG Lifegain;UG Flash","",
+"Scavenging Ooze",2,"Creature - Ooze",G,"cmd","170",rare,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters","",40630
+"Sharp-Eyed Rookie",2,"Creature - Human Detective",G,"mkm","176",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange;Card Advantage","",121828
+"Tough Cookie",2,"Artifact Creature - Food Golem",G,"j25","731",uncommon,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange","",
+"Wildborn Preserver",2,"Creature - Elf Archer",G,"eld","182",rare,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters;UG Flash","",78508
+"Augur of Autumn",3,"Creature - Human Druid",G,"mid","168",rare,Green,Owned,Non-foil,false,,,"RG Midrange;Card Advantage","",93318
+"Kami of Whispered Hopes",3,"Creature - Spirit",G,"mom","196",uncommon,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",110276
+"Mossborn Hydra",3,"Creature - Elemental Hydra",G,"fdn","107",rare,Green,Owned,Non-foil,false,,,"","",133782
+"Oran-Rief Ooze",3,"Creature - Ooze",G,"znr","198",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",83385
+"Tireless Provisioner",3,"Creature - Elf Scout",G,"plst","MH2-180",uncommon,Green,Owned,Non-foil,false,,,"RG Midrange;BG Lifegain","",
+"Tireless Tracker",3,"Creature - Human Scout",G,"plst","SOI-233",rare,Green,Owned,Non-foil,false,,,"RG Midrange;Card Advantage;WG Counters","",
+"Bristlebud Farmer",4,"Creature - Plant Druid",G,"big","17",mythic,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange","",125395
+"Forgotten Ancient",4,"Creature - Elemental",G,"plst","NCC-291",rare,Green,Owned,Non-foil,false,,,"WG Counters","",
+"Goreclaw, Terror of Qal Sisma",4,"Legendary Creature - Bear",G,"blc","222",rare,Green,Owned,Non-foil,false,,,"RG Midrange","",128591
+"Nightpack Ambusher",4,"Creature - Wolf",G,"j22","696",rare,Green,Owned,Non-foil,false,,,"RG Midrange;UG Flash","",
+"Slippery Bogbonder",4,"Creature - Human Druid",G,"ncc","312",rare,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters;UG Flash","",
+"Voracious Hydra",4,"Creature - Hydra",G,"m20","200",rare,Green,Owned,Non-foil,false,,,"Removal;RG Midrange;WG Counters","",73299
+"Biogenic Ooze",5,"Creature - Ooze",G,"rna","122",mythic,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",71244
+"Blossoming Bogbeast",5,"Creature - Beast",G,"c21","59",rare,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange","",89861
+"Elder Gargaroth",5,"Creature - Beast",G,"drc","111",mythic,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange;Card Advantage;UG Flash","",137399
+"Froghemoth",5,"Creature - Frog Horror",G,"afr","184",rare,Green,Owned,Non-foil,false,,,"BG Lifegain;RG Midrange;WG Counters","",91870
+"Verdurous Gearhulk",5,"Artifact Creature - Construct",G,"kld","172",mythic,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",62017
+"Carnage Tyrant",6,"Creature - Dinosaur",G,"xln","179",mythic,Green,Owned,Non-foil,false,,,"RG Midrange;UG Flash","",65376
+"Galewind Moose",6,"Creature - Elemental Elk",G,"blb","173",uncommon,Green,Owned,,false,,,"","",129591
+"Kogla, the Titan Ape",6,"Legendary Creature - Ape",G,"iko","162",rare,Green,Owned,Non-foil,false,,,"RG Midrange;Removal;UG Flash","",80333
+"Ochre Jelly",7,"Creature - Ooze",G,"afr","196",rare,Green,Owned,Non-foil,false,,,"RG Midrange;UG Flash;WG Counters","",91894
+"Snakeskin Veil",1,"Instant",G,"sta","57",uncommon,Green,Owned,Non-foil,false,,,"Protection;WG Counters","",89171
+"Tail Swipe",1,"Instant",G,"dmu","182",uncommon,Green,Owned,Non-foil,false,,,"UG Flash;Removal","",102840
+"Bite Down",2,"Instant",G,"dmu","155",common,Green,Owned,Non-foil,false,,,"Removal;UG Flash","",102786
+"Inscription of Abundance",2,"Instant",G,"znr","186",rare,Green,Owned,Non-foil,false,,,"WG Counters;BG Lifegain;Removal","",83357
+"Harrow",3,"Instant",G,"j25","668",common,Green,Owned,Non-foil,false,,,"UG Flash","",
+"Roiling Regrowth",3,"Instant",G,"znr","201",uncommon,Green,Owned,Non-foil,false,,,"","",83391
+"Bushwhack",1,"Sorcery",G,"j25","641",uncommon,Green,Owned,Non-foil,false,,,"Removal","",
+"Devouring Tendrils",2,"Sorcery",G,"stx","126",uncommon,Green,Owned,Non-foil,false,,,"BG Lifegain;Removal","",88729
+"Overwhelming Stampede",5,"Sorcery",G,"m11","189",rare,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters;UG Flash","",37360
+"Ozolith, the Shattered Spire",2,"Legendary Artifact",G,"mom","198",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",110280
+"Bow of Nylea",3,"Legendary Enchantment Artifact",G,"ths","153",rare,Green,Owned,Non-foil,false,,,"Removal;BG Lifegain;WG Counters","",50412
+"Hardened Scales",1,"Enchantment",G,"ktk","133",rare,Green,Owned,Non-foil,false,,,"WG Counters;RG Midrange","",54406
+"Utopia Sprawl",1,"Enchantment - Aura",G,"rvr","159",uncommon,Green,Owned,Non-foil,false,,,"RG Midrange;UG Flash;BG Lifegain","",120845
+"Ranger Class",2,"Enchantment - Class",G,"afr","202",rare,Green,Owned,Non-foil,false,,,"RG Midrange;WG Counters","",91906
+"Trudge Garden",3,"Enchantment",G,"c21","69",rare,Green,Owned,Non-foil,false,,,"BG Lifegain","",89881
+"Wilderness Reclamation",4,"Enchantment",G,"dsc","205",uncommon,Green,Owned,Non-foil,false,,,"UG Flash","",131035
+"Memnite",0,"Artifact Creature - Construct",,"plst","SOM-174",uncommon,Colorless,Owned,Non-foil,false,,,"WU Artifacts","",
+"Bomat Courier",1,"Artifact Creature - Construct",,"kld","199",rare,Red,Owned,Non-foil,false,,,"WU Artifacts;BR Aggro;WR Aggro","",62075
+"Gingerbrute",1,"Artifact Creature - Food Golem",,"woe","246",common,Colorless,Owned,Non-foil,false,,,"WR Aggro;UB Ninjas;BR Aggro;BG Lifegain;WR Voltron","",116880
+"Hope of Ghirapur",1,"Legendary Artifact Creature - Thopter",,"plst","AER-154",rare,Colorless,Owned,Non-foil,false,,,"WU Artifacts;UB Ninjas;WR Aggro;BR Aggro;WR Voltron","",
+"Signal Pest",1,"Artifact Creature - Pest",,"plst","MBS-131",uncommon,Colorless,Owned,Non-foil,false,,,"WU Artifacts","",
+"Containment Construct",2,"Artifact Creature - Construct",,"plst","NEO-243",uncommon,Colorless,Owned,Non-foil,false,,,"WU Artifacts;BR Aggro","",
+"Patchwork Automaton",2,"Artifact Creature - Construct",,"j25","757",uncommon,Colorless,Owned,Non-foil,false,,,"WU Artifacts;WG Counters","",
+"Perilous Myr",2,"Artifact Creature - Phyrexian Myr",,"a25","227",uncommon,Colorless,Owned,Non-foil,false,,,"UB Control;WU Artifacts;Removal","",67368
+"Steel Overseer",2,"Artifact Creature - Construct",,"pip","241",rare,Colorless,Owned,Non-foil,false,,,"","",132113
+"Chief of the Foundry",3,"Artifact Creature - Construct",,"j25","747",uncommon,Colorless,Owned,Non-foil,false,,,"WU Artifacts","",
+"Circuit Mender",3,"Artifact Creature - Insect",,"neo","242",uncommon,Colorless,Owned,Non-foil,false,,,"BG Lifegain;WU Artifacts","",97434
+"Liberator, Urza's Battlethopter",3,"Legendary Artifact Creature - Thopter",,"bro","237",rare,Colorless,Owned,Non-foil,false,,,"WU Artifacts;WG Counters","",105098
+"Shambling Suit",3,"Artifact Creature - Construct",,"eld","230",uncommon,Colorless,Owned,Non-foil,false,,,"WR Voltron;WU Artifacts","",78606
+"Stonecoil Serpent",4,"Artifact Creature - Snake",,"eld","235",rare,Colorless,Owned,Non-foil,false,,,"RG Midrange;UB Control;UG Flash;WU Artifacts","",78616
+"Traxos, Scourge of Kroog",4,"Legendary Artifact Creature - Construct",,"dmc","195",rare,Colorless,Owned,Non-foil,false,,,"WU Artifacts","",103280
+"Bone Saw",0,"Artifact - Equipment",,"con","135",common,Colorless,Owned,Non-foil,false,,,"WR Voltron","",31933
+"Bloodforged Battle-Axe",1,"Artifact - Equipment",,"c17","50",rare,Colorless,Owned,Non-foil,false,,,"WR Voltron","",73872
+"Bonesplitter",1,"Artifact - Equipment",,"mrd","146",common,Colorless,Owned,Non-foil,false,,,"WR Voltron","",19829
+"Eater of Virtue",1,"Legendary Artifact - Equipment",,"neo","245",rare,Colorless,Owned,Non-foil,false,,,"WR Voltron","",97440
+"Flayer Husk",1,"Artifact - Equipment",,"mbs","107",common,Colorless,Owned,Non-foil,false,,,"WR Voltron","",39583
+"Cranial Plating",2,"Artifact - Equipment",,"2xm","245",uncommon,Black,Owned,Non-foil,false,,,"WU Artifacts;WR Voltron","",82524
+"Ebony Fly",2,"Artifact",,"afc","60",uncommon,Colorless,Owned,Non-foil,false,,,"UG Flash;WU Artifacts","",
+"Mind Stone",2,"Artifact",,"c18","210",common,Colorless,Owned,Non-foil,false,,,"Card Advantage;UG Flash","",
+"Nim Deathmantle",2,"Artifact - Equipment",,"som","188",rare,Colorless,Owned,Non-foil,false,,,"WR Voltron;Protection","",38285
+"Swiftfoot Boots",2,"Artifact - Equipment",,"m12","219",uncommon,Colorless,Owned,Non-foil,false,,,"WR Voltron","",41445
+"Grafted Wargear",3,"Artifact - Equipment",,"5dn","126",uncommon,Colorless,Owned,Non-foil,false,,,"WR Voltron;WR Aggro;BR Aggro;RG Midrange;WG Counters;BG Lifegain","",20754
+"Loxodon Warhammer",3,"Artifact - Equipment",,"c21","249",rare,Colorless,Owned,Non-foil,false,,,"WR Voltron;BG Lifegain","",89603
+"Nettlecyst",3,"Artifact - Equipment",,"mh2","231",rare,Colorless,Owned,Non-foil,false,,,"WR Voltron;WU Artifacts","",90843
+"Well of Lost Dreams",4,"Artifact",,"plst","DST-159",rare,Colorless,Owned,Non-foil,false,,,"BG Lifegain","",
+"Batterskull",5,"Artifact - Equipment",,"nph","130",mythic,Colorless,Owned,Non-foil,false,,,"WR Voltron;UB Control;BG Lifegain;RG Midrange;UG Flash","",39974
+"Malcator, Purity Overseer",3,"Legendary Creature - Phyrexian Elephant Wizard",UW,"one","208",rare,Multicolored,Owned,Non-foil,false,,,"WU Artifacts","",106631
+"Urza, Prince of Kroog",4,"Legendary Creature - Human Artificer",UW,"bro","226",rare,Multicolored,Owned,Non-foil,false,,,"WU Artifacts","",105076
+"Yorion, Sky Nomad",5,"Legendary Creature - Bird Serpent",UW,"mb2","94",rare,Multicolored,Owned,,false,,,"","",134080
+"Ethersworn Sphinx",9,"Artifact Creature - Sphinx",UW,"mh2","195",uncommon,Multicolored,Owned,Non-foil,false,,,"WU Artifacts","",90767
+"Baleful Strix",2,"Artifact Creature - Bird",BU,"pc2","82",uncommon,Multicolored,Owned,Non-foil,false,,,"UB Ninjas","",45066
+"Silver-Fur Master",2,"Creature - Rat Ninja",BU,"neo","236",uncommon,Multicolored,Owned,Non-foil,false,,,"UB Ninjas","",97422
+"Ingenious Infiltrator",4,"Creature - Vedalken Ninja",BU,"mh1","204",uncommon,Multicolored,Owned,Non-foil,false,,,"UB Ninjas;Card Advantage","",72780
+"Fallen Shinobi",5,"Creature - Zombie Ninja",BU,"mh1","199",rare,Multicolored,Owned,Non-foil,false,,,"UB Ninjas","",72770
+"Dreadhorde Butcher",2,"Creature - Zombie Warrior",BR,"war","194",rare,Multicolored,Owned,Non-foil,false,,,"BR Aggro","",71994
+"Judith, the Scourge Diva",3,"Legendary Creature - Human Shaman",BR,"rna","185",rare,Multicolored,Owned,Non-foil,false,,,"BR Aggro","",71370
+"Lagomos, Hand of Hatred",3,"Legendary Creature - Human Shaman",BR,"dmu","304",uncommon,Multicolored,Owned,Non-foil,false,,,"BR Aggro","",
+"The Infamous Cruelclaw",3,"Legendary Creature - Weasel Mercenary",BR,"blb","219",mythic,Multicolored,Owned,Non-foil,false,,,"BR Aggro","",129683
+"Goblin Anarchomancer",2,"Creature - Goblin Shaman",GR,"mh2","200",common,Multicolored,Owned,Non-foil,false,,,"RG Midrange","",90777
+"Xenagos, God of Revels",5,"Legendary Enchantment Creature - God",GR,"bng","156",mythic,Multicolored,Owned,Non-foil,false,,,"RG Midrange","",51745
+"Ruric Thar, the Unbowed",6,"Legendary Creature - Ogre Warrior",GR,"dgm","99",rare,Multicolored,Owned,Non-foil,false,,,"RG Midrange","",48222
+"Botanical Brawler",2,"Creature - Elemental Warrior",GW,"mom","220",uncommon,Multicolored,Owned,Non-foil,false,,,"WG Counters","",110328
+"Conclave Mentor",2,"Creature - Centaur Cleric",GW,"m21","216",uncommon,Multicolored,Owned,Non-foil,false,,,"WG Counters","",81659
+"Dromoka's Command",2,"Instant",GW,"dtk","221",rare,Multicolored,Owned,Non-foil,false,,,"WG Counters","",56182
+"Kutzil, Malamet Exemplar",3,"Legendary Creature - Cat Warrior",GW,"lci","232",uncommon,Multicolored,Owned,Non-foil,false,,,"WG Counters","",118302
+"Anguished Unmaking",3,"Instant",BW,"soi","242",rare,Multicolored,Owned,Non-foil,false,,,"WB Blink","",60088
+"Lurrus of the Dream-Den",3,"Legendary Creature - Cat Nightmare",BW,"q06","9",rare,Multicolored,Owned,Non-foil,false,,,"","",
+"Ruthless Lawbringer",3,"Creature - Vampire Assassin",BW,"otj","229",uncommon,Multicolored,Owned,Non-foil,false,,,"WB Blink","",124369
+"Expressive Iteration",2,"Sorcery",RU,"stx","186",uncommon,Multicolored,Owned,Non-foil,false,,,"UR Spellslinger","",88879
+"Sprite Dragon",2,"Creature - Faerie Dragon",RU,"clb","852",uncommon,Multicolored,Owned,Non-foil,false,,,"UR Spellslinger","",
+"Stormcatch Mentor",2,"Creature - Otter Wizard",RU,"blb","234",uncommon,Multicolored,Owned,,false,,,"","",129713
+"Third Path Iconoclast",2,"Creature - Human Monk",RU,"bro","223",uncommon,Multicolored,Owned,Non-foil,false,,,"UR Spellslinger","",105068
+"Valentin, Dean of the Vein // Lisette, Dean of the Root",1,"Legendary Creature - Vampire Warlock",B,"stx","161",rare,Multicolored,Owned,,false,,,"","",88827
+"Gyome, Master Chef",4,"Legendary Creature - Troll Warlock",BG,"c21","5",mythic,Multicolored,Owned,Non-foil,false,,,"BG Lifegain","",89253
+"Ygra, Eater of All",5,"Legendary Creature - Elemental Cat",BG,"blb","241",mythic,Multicolored,Owned,,false,,,"","",129727
+"Blade Historian",4,"Creature - Human Cleric",RW,"stx","165",rare,Multicolored,Owned,Non-foil,false,,,"WR Voltron;WR Aggro","",88837
+"Bruenor Battlehammer",4,"Legendary Creature - Dwarf Warrior",RW,"afr","219",uncommon,Multicolored,Owned,Non-foil,false,,,"WR Voltron","",91940
+"Adult Gold Dragon",5,"Creature - Dragon",WR,"afr","216",rare,Multicolored,Owned,Non-foil,false,,,"WR Voltron;WR Aggro","",91934
+"Nahiri, Forged in Fury",6,"Legendary Creature - Kor Artificer",RW,"mat","36",mythic,Multicolored,Owned,Non-foil,false,,,"WR Voltron","",109194
+"Growth Spiral",2,"Instant",GU,"dsc","88",common,Multicolored,Owned,Non-foil,false,,,"UG Flash","",131321
+"Uro, Titan of Nature's Wrath",3,"Legendary Creature - Elder Giant",GU,"m3c","277",mythic,Multicolored,Owned,Non-foil,false,,,"UG Flash","",127099
+"Koma, Cosmos Serpent",7,"Legendary Creature - Serpent",GU,"mkc","213",mythic,Multicolored,Owned,Non-foil,false,,,"UG Flash","",122574
+"Adarkar Wastes",0,"Land",WU,"tdc","338",rare,Lands,Owned,Non-foil,false,,,"","",138617
+"Hengegate Pathway // Mistgate Pathway",0,"Land",UW,"khm","260",rare,Lands,Owned,Non-foil,false,,,"","",87869
+"Port Town",0,"Land",WU,"soi","278",rare,Lands,Owned,Non-foil,false,,,"","",59926
+"Drowned Catacomb",0,"Land",UB,"m10","224",rare,Lands,Owned,Non-foil,false,,,"","",32837
+"Sunken Hollow",0,"Land - Island Swamp",UB,"bfz","249",rare,Lands,Owned,Non-foil,false,,,"","",58659
+"Watery Grave",0,"Land - Island Swamp",UB,"rvr","291",rare,Lands,Owned,Non-foil,false,,,"","",121149
+"Blightstep Pathway // Searstep Pathway",0,"Land",BR,"khm","252",rare,Lands,Owned,Non-foil,false,,,"","",87849
+"Dragonskull Summit",0,"Land",BR,"m10","223",rare,Lands,Owned,Non-foil,false,,,"","",32863
+"Graven Cairns",0,"Land",BR,"fut","175",rare,Lands,Owned,Non-foil,false,,,"","",26702
+"Cinder Glade",0,"Land - Mountain Forest",GR,"c20","263",rare,Lands,Owned,Non-foil,false,,,"","",
+"Karplusan Forest",0,"Land",RG,"dmu","250",rare,Lands,Owned,Non-foil,false,,,"","",102976
+"Thornspire Verge",0,"Land",RG,"dsk","270",rare,Lands,Owned,Non-foil,false,,,"","",130671
+"Canopy Vista",0,"Land - Forest Plains",WG,"bfz","234",rare,Lands,Owned,Non-foil,false,,,"","",58671
+"Hushwood Verge",0,"Land",WG,"dsk","261",rare,Lands,Owned,Non-foil,false,,,"","",130653
+"Overgrown Farmland",0,"Land",WG,"mid","265",rare,Lands,Owned,Non-foil,false,,,"","",93542
+"Fetid Heath",0,"Land",WB,"eve","176",rare,Lands,Owned,Non-foil,false,,,"","",30114
+"Isolated Chapel",0,"Land",WB,"isd","242",rare,Lands,Owned,Non-foil,false,,,"","",42652
+"Shineshadow Snarl",0,"Land",WB,"stx","272",rare,Lands,Owned,Non-foil,false,,,"","",89051
+"Cascade Bluffs",0,"Land",UR,"tdc","345",rare,Lands,Owned,Non-foil,false,,,"","",138631
+"Shivan Reef",0,"Land",UR,"blc","331",rare,Lands,Owned,Non-foil,false,,,"","",128809
+"Spirebluff Canal",0,"Land",UR,"otj","270",rare,Lands,Owned,Non-foil,false,,,"","",124453
+"Darkbore Pathway // Slitherbore Pathway",0,"Land",BG,"khm","292",rare,Lands,Owned,Non-foil,false,,,"","",
+"Deathcap Glade",0,"Land",BG,"vow","261",rare,Lands,Owned,Non-foil,false,,,"","",94902
+"Woodland Cemetery",0,"Land",BG,"dom","248",rare,Lands,Owned,Non-foil,false,,,"","",67961
+"Furycalm Snarl",0,"Land",RW,"stx","266",rare,Lands,Owned,Non-foil,false,,,"","",89039
+"Needleverge Pathway // Pillarverge Pathway",0,"Land",RW,"znr","263",rare,Lands,Owned,Non-foil,false,,,"","",83529
+"Rugged Prairie",0,"Land",WR,"eve","178",rare,Lands,Owned,Non-foil,false,,,"","",30098
+"Dreamroot Cascade",0,"Land",UG,"vow","262",rare,Lands,Owned,Non-foil,false,,,"","",94904
+"Overflowing Basin",0,"Land",UG,"drc","165",rare,Lands,Owned,Non-foil,false,,,"","",137507
+"Yavimaya Coast",0,"Land",UG,"dmu","261",rare,Lands,Owned,Non-foil,false,,,"","",102998
+"Castle Locthwain",0,"Land",B,"clb","884",rare,Lands,Owned,Non-foil,false,,,"","",
+"Crawling Barrens",0,"Land",,"znr","262",rare,Lands,Owned,Non-foil,false,,,"","",83527
+"Den of the Bugbear",0,"Land",R,"afr","254",rare,Lands,Owned,Non-foil,false,,,"","",92010
+"Eiganjo, Seat of the Empire",0,"Legendary Land",W,"neo","268",rare,Lands,Owned,Non-foil,false,,,"","",97486
+"Evolving Wilds",0,"Land",WUBRG,"ddo","58",common,Lands,Owned,Non-foil,false,,,"","",
+"Fabled Passage",0,"Land",WUBRG,"eld","244",rare,Lands,Owned,Non-foil,false,,,"","",78634
+"Hall of Storm Giants",0,"Land","U","afr","257",rare,Lands,Owned,Non-foil,false,,,"","",92016
+"Lair of the Hydra",0,"Land",G,"afr","259",rare,Lands,Owned,Non-foil,false,,,"","",92020
+"Rogue's Passage",0,"Land",,"otc","313",uncommon,Lands,Owned,Non-foil,false,,,"","",125089
+"Underdark Rift",0,"Land",,"afc","62",uncommon,Lands,Owned,Non-foil,false,,,"","",92602
