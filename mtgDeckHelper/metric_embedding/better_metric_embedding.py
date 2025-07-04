@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import choice
 
 import numpy as np
 import pandas as pd
@@ -11,6 +11,19 @@ from torch.nn.utils import clip_grad_norm_
 from metric_embedding.metric_embedding import load_data
 
 PRINT_LOSS_N = 10
+
+
+def remove_from_dummy_data(df, cube, count):
+    count = count - len(cube)
+
+    count_per_card = df.sum(axis=0).rename('count').sort_values(ascending=False)
+    # count_per_card = count_per_card[count_per_card.loc[:, 'card'] > threshold]
+    flags = ~count_per_card.index.isin(cube.index)
+    count_per_card = count_per_card[flags]
+    selected = count_per_card.head(max(0, count))
+
+    return df[selected.index.tolist() + cube.index.tolist()]
+
 
 class ContrastiveCardIndexEmbeddingDataset(Dataset):
     def __init__(self, data, targets, *args, **kwargs):
@@ -124,6 +137,7 @@ if __name__ == '__main__':
     reshaped[not_played] = 0
 
     df = reshaped.iloc[:, 2:]
+    # df = remove_from_dummy_data(df, cube, 510)
 
     X = df.to_numpy()
 
@@ -142,6 +156,8 @@ if __name__ == '__main__':
         model.load_state_dict(torch.load("./params.pt"))
     except FileNotFoundError:
         print("No saved file found")
+    except RuntimeError:
+        pass
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -159,7 +175,7 @@ if __name__ == '__main__':
 
     epoch_to_save = 20
 
-    epochs = 500
+    epochs = 300
     for epoch in range(epochs):
         print(f"Epoch: {epoch}")
         train_loss = train(model, optimizer, train_loader, device, to_print=True)

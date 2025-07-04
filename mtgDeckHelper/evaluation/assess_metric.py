@@ -9,6 +9,7 @@ from card_pool import CardPool
 from evaluation.environment import Environment
 from metric_embedding.better_metric_embedding import ContrastiveCardIndexEmbeddingDataset, ContrastiveMetricEmbedding, \
     train
+from metric_embedding.metric_embedding import load_data
 
 
 class MetricEmbeddingAssessor(AbstractAssessor):
@@ -46,7 +47,6 @@ class MetricEmbeddingAssessor(AbstractAssessor):
         a = self.model(vector).detach().numpy()
 
         closest_cards = []
-        distance = 0
         for k in self.card_pool:
             index = self.decks.columns.get_loc(k)
             pool_vector = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=len(self.decks.columns))[0].to(torch.float32)
@@ -63,29 +63,29 @@ class MetricEmbeddingAssessor(AbstractAssessor):
         return 1/avg
 
 
-def load_data():
-    cube = pd.read_csv('../alahamaretov_arhiv/cube_copy.csv',
-                       usecols=['name', 'CMC', 'Type', 'Color'],
-                       dtype={'name': 'str', 'CMC': 'int', 'Type': 'str', 'Color': 'str'})
-    cube = cube.rename(columns={"name": "card", "CMC": "cmc", "Type": "type", "Color": "color"})
-    cube.set_index('card', inplace=True)
-
-    decks = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
-                          sheet_name='Decks',
-                          usecols=['date', 'player', 'card'],
-                          dtype={'date': 'datetime64[ns]', 'player': 'str', 'card': 'str'})
-    decks.date = decks.date.apply(lambda x: x.date())
-    decks.set_index(['date', 'player'], inplace=True)
-
-    games = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
-                          sheet_name='Games',
-                          usecols=['date', 'player', 'opponent', 'wins', 'losses'],
-                          dtype={'date': 'datetime64[ns]', 'player': 'str', 'opponent': 'str', 'wins': 'int',
-                                 'losses': 'int'})
-    games.date = games.date.apply(lambda x: x.date())
-    games.set_index(['date', 'player'], inplace=True)
-
-    return cube, decks, games
+# def load_data():
+#     cube = pd.read_csv('../alahamaretov_arhiv/cube_copy.csv',
+#                        usecols=['name', 'CMC', 'Type', 'Color'],
+#                        dtype={'name': 'str', 'CMC': 'int', 'Type': 'str', 'Color': 'str'})
+#     cube = cube.rename(columns={"name": "card", "CMC": "cmc", "Type": "type", "Color": "color"})
+#     cube.set_index('card', inplace=True)
+#
+#     decks = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
+#                           sheet_name='Decks',
+#                           usecols=['date', 'player', 'card'],
+#                           dtype={'date': 'datetime64[ns]', 'player': 'str', 'card': 'str'})
+#     decks.date = decks.date.apply(lambda x: x.date())
+#     decks.set_index(['date', 'player'], inplace=True)
+#
+#     games = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
+#                           sheet_name='Games',
+#                           usecols=['date', 'player', 'opponent', 'wins', 'losses'],
+#                           dtype={'date': 'datetime64[ns]', 'player': 'str', 'opponent': 'str', 'wins': 'int',
+#                                  'losses': 'int'})
+#     games.date = games.date.apply(lambda x: x.date())
+#     games.set_index(['date', 'player'], inplace=True)
+#
+#     return cube, decks, games
 
 
 def remove_from_dummy_data(df, cube, count):
@@ -156,8 +156,9 @@ if __name__=='__main__':
 
         to_save = {}
         for i in range(5, 146, 10):
+            model = ContrastiveMetricEmbedding(k, i)
+            # model.load_state_dict(torch.load("../metric_embedding/params.pt"))
 
-            model = ContrastiveMetricEmbedding(len(dataset), i)
             optimizer = torch.optim.Adam(
                 model.parameters(),
                 lr=1e-4
@@ -166,7 +167,7 @@ if __name__=='__main__':
             for epoch in range(epochs):
                 # print(f"Epoch: {epoch}")
                 train_loss = train(model, optimizer, train_loader, device)
-                if (epoch+1) % epoch_to_save == 0:
+                if epoch==0 or (epoch+1) % epoch_to_save == 0:
                     # torch.save(model.state_dict(), "./params.pt")
                     print(f"Mean Loss in Epoch {epoch}: {train_loss:.3f}")
 
@@ -194,4 +195,4 @@ if __name__=='__main__':
         with pd.ExcelWriter(f"./results.xlsx", mode='a') as writer:
             to_save.to_excel(writer, sheet_name=f'{draft_num}_{k}')
             print(f"written {draft_num}_{k}")
-        # to_save.to_excel(f"./results.xlsx", sheet_name=f'{draft_num}_{k}')
+        # print(to_save)

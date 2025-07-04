@@ -31,7 +31,7 @@ def get_card(cardname):
 if __name__=='__main__':
     # get_card("Harrow")
     # get_card("Experiment Kraj")
-    cube = pd.read_csv('./alahamaretov_arhiv/cube.csv',
+    cube = pd.read_csv('../alahamaretov_arhiv/cube.csv',
                        usecols=['name', 'Set'],
                        dtype={'name': 'str', 'Set': 'str'})
     cube = cube.rename(columns={"name": "card", "Set": "set"})
@@ -50,5 +50,3 @@ if __name__=='__main__':
     expansions.set_index('card', inplace=True)
     expansions = pd.pivot_table(expansions, index=expansions.index, columns='set', fill_value=0, aggfunc=lambda x: 1)
     expansions.to_csv('expansions.csv')
-
-    pass

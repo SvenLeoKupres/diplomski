@@ -245,6 +245,7 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
 
 class SimpleMetricEmbeddingAssessor(AbstractAssessor):
     def __init__(self, cube, card_pool, removed, num_closest_cards=3):
+        #TODO remove hardcoded embedding_dim and input_dim
         super().__init__(cube, card_pool, removed)
 
         decks, games = loadDataFromFiles()
