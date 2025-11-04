@@ -46,8 +46,8 @@ class CardDataFrame(ttk.Frame):
     def __init__(self, parent, img, cardname, assessor, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
-        canvas = tk.Label(self, image=img)
-        canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.canvas = tk.Label(self, image=img)
+        self.canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         # label = tk.Label(self, text=cardname, font=("Times New Roman", 25))
         # label.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
@@ -79,6 +79,12 @@ class CardDataFrame(ttk.Frame):
         else:
             self.button_text = "PICK"
             self.button.configure(text="PICK")
+
+    def get_cardname(self):
+        return self.card_information.cardname
+
+    def set_background_color(self, color):
+        self.button.config(bg=color)
 
     # def set_card_score(self, num):
     #     self.label.config(text=num)

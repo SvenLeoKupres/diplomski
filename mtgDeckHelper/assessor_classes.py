@@ -245,7 +245,7 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
 
 class SimpleMetricEmbeddingAssessor(AbstractAssessor):
     def __init__(self, cube, card_pool, removed, num_closest_cards=3):
-        #TODO remove hardcoded embedding_dim and input_dim
+        # maybe remove hardcoded embedding_dim and input_dim - problem is having to train it when starting...
         super().__init__(cube, card_pool, removed)
 
         decks, games = loadDataFromFiles()
@@ -328,24 +328,49 @@ class SimpleMetricEmbeddingAssessor(AbstractAssessor):
         vector = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=len(self.card_list))[0].to(torch.float32)
         a = self.model(vector).detach().numpy()
 
-        closest_cards = dict()
         distance = 0
         for k in self.card_pool:
             index = self.card_list.index(k)
             pool_vector = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=len(self.card_list))[0].to(torch.float32)
             b = self.model(pool_vector).detach().numpy()
-            closest_cards[k] = self._distance(a, b)
-            distance += closest_cards[k]
-            if len(closest_cards) > self.num_closest_cards:
-                name = k
-                for i in closest_cards.keys():
-                    if closest_cards[i] > closest_cards[name]:
-                        name = i
-                del closest_cards[name]
+            distance += self._distance(a, b)
 
         avg = distance / len(self.card_pool)
 
+        # if -10e-6<distance<10e-6:
+        #     return 1000
+
         return 1/avg
+
+
+class MetricEmbeddingAssessorClosest(SimpleMetricEmbeddingAssessor):
+    def __init__(self, cube, card_pool, removed, num_closest_cards=3):
+        super().__init__(cube, card_pool, removed, num_closest_cards)
+
+    def result_string(self, cardname):
+        return super().result_string(cardname)
+
+    def calculate_card_score(self, cardname):
+        if len(self.card_pool) == 0:
+            return 0
+
+        index = self.card_list.index(cardname)
+        vector = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=len(self.card_list))[0].to(torch.float32)
+        a = self.model(vector).detach().numpy()
+
+        best_distance = np.inf
+        for k in self.card_pool:
+            index = self.card_list.index(k)
+            pool_vector = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=len(self.card_list))[0].to(torch.float32)
+            b = self.model(pool_vector).detach().numpy()
+            distance = self._distance(a, b)
+            if best_distance > distance:
+                best_distance = distance
+
+        # if -10e-6<distance<10e-6:
+        #     return 1000
+
+        return 1/best_distance
 
 
 class CompositeAssessor(AbstractAssessor):

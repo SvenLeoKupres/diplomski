@@ -120,3 +120,11 @@ mozda da metoda 1 gleda koja je po redu odabrana karta, ne samo je li uzeta ili 
 
 Za color_bonus se vidi da je i mali bonus daleko bolji nego nikakav
 No stvari su cudne za color_bonus u rangu [1, 10]. Poslije toga generalno pocinje opadati
+
+Problem s koristenjem prosjecne udaljenosti karata u metrickom prostoru: s vremenom postane jako generalan. Vjerojatno kako bira i zaokruzuje prostor, karte koje su u sredini postanu uvijek najbolji odabir
+-teorija isprobana: ako se promatra udaljenost samo do najblize karte, rezultat je jako slican. implicitni zakljucak: premalo dimenzija u metrickom prostoru ili prekratak trening
+-(rezultati nisu cvrsto dokazani, samo isprobano na par primjera)
+-follow up: problem uglavnom rijesen nakon dodatnog treniranja mreze, ali i dalje postoji za manje koristene karte
+
+Sto sustav cesto napravi: pretpostavi povezanost dvije karte koje ne bi trebalo nuzno biti direktno povezane, tj ne otkriva latentnu kartu
+Npr. sustav pretpostavlja povezanost "The Raven Man" i "Gonti, Lord of Luxury" jer se oba koriste u blink deckovima

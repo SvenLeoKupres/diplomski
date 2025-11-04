@@ -30,6 +30,9 @@ def switch_pack(window):
         window.packs[window.selected_pack].toggle_removing()
         # self.packs[self.selected_pack].update_scores(self.assessor)
 
+    # set off listeners which track when there was an update in a pack
+    window.packs[window.selected_pack].listen_load()
+
 
 class Window(tk.Tk):
     def __init__(self, available_cards, num_players, card_pool, removed_cards, assessor, singleton=False, num_rounds=3, *args, **kwargs):
@@ -62,6 +65,8 @@ class Window(tk.Tk):
 
         self.packs[self.selected_pack].pack()
 
+        self.packs[self.selected_pack].listen_load()
+
     def add_button_listener(self, func):
         """Add a listener to each button in the card pack"""
         for k in self.packs:
@@ -85,10 +90,11 @@ class Window(tk.Tk):
 
 
 class PreconstructedWindow(tk.Tk):
-    def __init__(self, order_cards: [], num_players, card_pool, removed_cards, assessor, num_rounds=3, listeners:[]=None, *args, **kwargs):
+    def __init__(self, order_cards: [], num_players, card_pool, removed_cards, assessor, num_rounds=3, num_cards=15, listeners:[]=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.num_rounds = num_rounds
+        self.num_cards = num_cards
         self.assessor = assessor  # the thing that decides card scores
 
         self.num_to_remove = num_players-1    # to count how many cards need to be removed before adding a new card to the card pool
@@ -100,7 +106,7 @@ class PreconstructedWindow(tk.Tk):
 
         self.order_cards = order_cards
 
-        self.packs = [FilledPack(self, order_cards[k*15:(k+1)*15-k], card_pool, removed_cards, self.assessor) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
+        self.packs = [FilledPack(self, order_cards[k*num_cards:(k+1)*num_cards-k], card_pool, removed_cards, self.assessor) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
         self.selected_pack = 0
 
         self.packs[self.selected_pack].pack()
@@ -112,6 +118,8 @@ class PreconstructedWindow(tk.Tk):
         #         self.add_button_listener(listener)
         # else:
         #     self.add_button_listener(lambda: switch_pack(self))
+
+        self.packs[self.selected_pack].listen_load()
 
     def add_button_listener(self, func):
         """Add a listener to each button in the card pack"""
@@ -132,7 +140,7 @@ class PreconstructedWindow(tk.Tk):
         if self.num_rounds == 1:
             return
 
-        new_window = PreconstructedWindow(self.order_cards[15*self.num_players:], self.num_players, self.card_pool, self.removed_cards, self.assessor, self.num_rounds-1)
+        new_window = PreconstructedWindow(self.order_cards[self.num_cards*self.num_players:], self.num_players, self.card_pool, self.removed_cards, self.assessor, self.num_rounds-1, self.num_cards)
         for k in self.listeners[1:]:
             new_window.add_button_listener(k)
         new_window.mainloop()

@@ -15,6 +15,26 @@ def smooth_winrate(alpha=0):
     return winrate
 
 
+def fe_model(df, alpha):
+
+
+    player_wr = df.groupby("player").apply(smooth_winrate(alpha)).rename("winrate")
+    daily_player_wr = df.groupby(["date", "player"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
+    daily_player_wr['winrate'] = daily_player_wr.index.get_level_values('player').map(player_wr)
+    daily_player_wr["lift"] = daily_player_wr["daily_winrate"] - daily_player_wr["winrate"]
+
+    card_wr = df.groupby("card").apply(smooth_winrate(alpha)).rename("winrate")
+    daily_card_wr = df.groupby(["date", "card"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
+    daily_card_wr["winrate"] = daily_card_wr.index.get_level_values('card').map(card_wr)
+    daily_card_wr["lift"] = daily_card_wr["daily_winrate"] - daily_card_wr["winrate"]
+
+    y = np.nan_to_num(daily_player_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
+    X = np.nan_to_num(daily_card_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
+    # y = y.sum(axis=0).reshape(-1, 1)
+    # X = X.sum(axis=0).reshape(-1, 1)
+    return LinearRegression().fit(X, y)
+
+
 if __name__=='__main__':
     cube = pd.read_csv('../alahamaretov_arhiv/cube.csv',
                        usecols=['name', 'CMC', 'Type', 'Color'],
@@ -38,25 +58,7 @@ if __name__=='__main__':
     games.set_index(['date', 'player'], inplace=True)
 
     df = decks.merge(games, on=["date", "player"])
-
-    alpha = 0  # factor that determines smoothing
-
-    player_wr = df.groupby("player").apply(smooth_winrate(alpha)).rename("winrate")
-    daily_player_wr = df.groupby(["date", "player"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
-    daily_player_wr['winrate'] = daily_player_wr.index.get_level_values('player').map(player_wr)
-    daily_player_wr["lift"] = daily_player_wr["daily_winrate"] - daily_player_wr["winrate"]
-
-    card_wr = df.groupby("card").apply(smooth_winrate(alpha)).rename("winrate")
-    daily_card_wr = df.groupby(["date", "card"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
-    daily_card_wr["winrate"] = daily_card_wr.index.get_level_values('card').map(card_wr)
-    daily_card_wr["lift"] = daily_card_wr["daily_winrate"] - daily_card_wr["winrate"]
-
-
-    y = np.nan_to_num(daily_player_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
-    X = np.nan_to_num(daily_card_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
-    # y = y.sum(axis=0).reshape(-1, 1)
-    # X = X.sum(axis=0).reshape(-1, 1)
-    model = LinearRegression().fit(X, y)
+    model = fe_model(df, 0)
     # print(model.score(X, y))
     # print(model.coef_)
     # print(model.intercept_)
@@ -83,12 +85,13 @@ if __name__=='__main__':
     for index, k in enumerate(fronts[:15]):
         paretto_fronts.create_graph(card_stats, k, index, True)
     # paretto_fronts.create_graph(card_stats, fronts[0], front_num=0, label=True)
+    plt.savefig("pareto_fronts.png")
     plt.show()
 
-    X2 = sm.add_constant(X)
-    est = sm.OLS(y.T[0], X2).fit()
-    print(est.summary())
-    pass
+    # X2 = sm.add_constant(X)
+    # est = sm.OLS(y.T[0], X2).fit()
+    # print(est.summary())
+    # pass
 
     # params = np.append(model.intercept_, model.coef_)
     # predictions = model.predict(X)

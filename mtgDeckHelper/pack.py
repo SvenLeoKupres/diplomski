@@ -34,6 +34,9 @@ class Pack(ttk.Frame):
             self.images.append([])
 
         self.listeners = []
+        self.listeners.append(self._set_best_card)
+        self.pack_load_listeners = []
+        self.pack_load_listeners.append(self._set_best_card)
 
     def is_full(self):
         return self.full
@@ -50,9 +53,14 @@ class Pack(ttk.Frame):
             for i in k:
                 i.toggle_button_text()
 
+    def listen_load(self):
+        for k in self.pack_load_listeners:
+            k()
+
     def add_card(self, cardname):
         """adds a card into the card pack"""
         if self.full:
+            # self.listen_load()
             return
 
         img = get_card_image(cardname)
@@ -78,6 +86,8 @@ class Pack(ttk.Frame):
         frame.grid(row=row, column=col)
         self.cards[row].append(frame)
 
+        self.listen_load()
+
     def __len__(self):
         return self.index
 
@@ -91,6 +101,7 @@ class Pack(ttk.Frame):
             return
 
         self.cards[row][col].grid_remove()
+        # self.cards[row].pop(col)
         self.index -= 1
 
         if self.is_removing():
@@ -107,11 +118,29 @@ class Pack(ttk.Frame):
             for i in k:
                 i.add_listener(func)
 
+    def add_pack_load_listener(self, func):
+        self.pack_load_listeners.append(func)
+
     def get_card(self, index):
         row = index // self.col_size
         col = index - row * self.col_size
 
         return self.cards[row][col]
+
+    def _set_best_card(self):
+        if not self.is_full():
+            return
+        best_card = self.cards[0][0]
+        best_score = self.assessor.calculate_card_score(best_card.get_cardname())
+        for k in self.cards:
+            for i in k:
+                i.set_background_color("red")
+                cardname = i.get_cardname()
+                score = self.assessor.calculate_card_score(cardname)
+                if (score > best_score and cardname not in self.removed_cards and cardname not in self.card_pool) or best_card.get_cardname() in self.removed_cards or best_card.get_cardname() in self.card_pool:
+                    best_card = i
+                    best_score = score
+        best_card.set_background_color("green")
 
 
 class FilledPack(Pack):

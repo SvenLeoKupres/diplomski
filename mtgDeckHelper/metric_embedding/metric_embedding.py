@@ -69,11 +69,14 @@ def elongate_vector(vector):
 
 
 class CardIndexEmbeddingDataset(Dataset):
-    def __init__(self, data, targets, threshold=0.5, *args, **kwargs):
+    def __init__(self, data, targets, calculate_winrate='mean', threshold=0.5, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.data = data
         self.targets = targets
+
+        # method to calculate card winrate, for now either 'mean' or 'weighted'
+        self.calculate_winrate = calculate_winrate
 
         # Threshold for when a card is considered positive
         self.threshold = threshold
@@ -108,7 +111,11 @@ class CardIndexEmbeddingDataset(Dataset):
                 deck_range_2 = self.data[:, card] == 1
 
                 deck_range = deck_range_2 * deck_range_1
-                winrate = self.targets[deck_range].mean().item()
+                winrate = None
+                if self.calculate_winrate == 'mean':
+                    winrate = self.targets[deck_range].mean().item()
+                elif self.calculate_winrate == 'weighted':
+                    winrate = (self.targets[deck_range,0]*self.targets[deck_range,1]).sum()/self.targets[deck_range,1].sum()
                 if check_function(winrate, self.threshold):
                     card_pick = \
                     one_hot(torch.Tensor([card]).to(torch.int64), num_classes=self.data.shape[1])[0].to(
@@ -155,22 +162,18 @@ class SimpleMetricEmbedding(nn.Module):
         self.card_num = card_num
         self.margin = margin
 
-        # self.layers = nn.Sequential(nn.Linear(self.card_num, self.card_num//2),
-        #                             nn.Linear(self.card_num//2, self.card_num//4),
-        #                             nn.Linear(self.card_num//4, self.card_num//2),
-        #                             nn.Linear(self.card_num//2, emb_size))
         self.layers = nn.Sequential(nn.Linear(self.card_num, self.card_num//2),
                                     nn.ReLU(),
                                     # nn.Linear(self.card_num//2, self.card_num//2),
+                                    # nn.ReLU(),
                                     nn.Linear(self.card_num//2, emb_size))
-                                    # nn.Softmax(dim=1))
         self.requires_grad_(True)
 
     def forward(self, data):
         return self.layers(data)
 
     def get_features(self, data):
-        # Returns tensor with dimensions BATCH_SIZE, EMB_SIZE
+        """Returns tensor with dimensions BATCH_SIZE, EMB_SIZE"""
         x = self.forward(data)
         return x
 
@@ -200,10 +203,7 @@ def train(model, optimizer, loader, device='cuda'):
     return np.mean(losses)
 
 
-if __name__ == '__main__':
-    # vector = torch.tensor([1, 0, 0, 0, 1, 0, 1])
-    # print(elongate_vector(vector))
-
+def create_dataset(calculate_winrate='mean'):
     cube, decks, games = load_data()
     # df = decks.merge(games, on=["date", "player"])
 
@@ -216,14 +216,14 @@ if __name__ == '__main__':
     )
 
     # Clean up column names
-    reshaped.columns.name = None
-    reshaped.columns = [f'{col}' for col in reshaped.columns]
+    # reshaped.columns.name = None
+    # reshaped.columns = [f'{col}' for col in reshaped.columns]
 
     # First, make sure index is a MultiIndex, not a single column of tuples
-    reshaped.index = pd.MultiIndex.from_tuples(reshaped.index, names=['date', 'player'])
+    # reshaped.index = pd.MultiIndex.from_tuples(reshaped.index, names=['date', 'player'])
 
     # Then reset it to get 'date' and 'player' as separate columns
-    reshaped = reshaped.reset_index()
+    # reshaped = reshaped.reset_index()
 
     cardnames = decks.loc[:, "card"].sort_values().unique()
     not_played = cube[~cube.index.isin(cardnames)].index
@@ -240,7 +240,15 @@ if __name__ == '__main__':
     deck_losses = df2['losses'].sum()
     deck_winrates = (deck_wins + alpha) / (deck_wins + deck_losses + 2 * alpha)
 
-    y = deck_winrates.to_numpy()
+    y = None
+    if calculate_winrate == 'mean':
+        y = deck_winrates.to_numpy()
+    elif calculate_winrate == 'weighted':
+        deck_total_games = deck_wins + deck_losses
+        result = pd.concat([deck_winrates, deck_total_games], axis=1, ignore_index=True)
+        y = result.to_numpy()
+
+    return CardIndexEmbeddingDataset(torch.Tensor(X), torch.Tensor(y), calculate_winrate)
 
     # better to do it lazy
     # new_X = []
@@ -250,13 +258,17 @@ if __name__ == '__main__':
     # # new_X = torch.Tensor(new_X) # torch.tensor(new_X)
     # pass
 
-    # split=1
     # fin_index = int(0.8*len(X))
     #
     # train_dataset = CardIndexEmbeddingDataset(torch.Tensor(X)[:fin_index], torch.Tensor(y)[:fin_index])
     # test_dataset = CardIndexEmbeddingDataset(torch.Tensor(X)[fin_index:], torch.Tensor(y)[fin_index:])
-    dataset = CardIndexEmbeddingDataset(torch.Tensor(X), torch.Tensor(y))
-    # print(dataset[0])
+
+
+if __name__ == '__main__':
+    # vector = torch.tensor([1, 0, 0, 0, 1, 0, 1])
+    # print(elongate_vector(vector))
+
+    dataset = create_dataset(calculate_winrate='weighted')
     model = SimpleMetricEmbedding(len(dataset), 100)
     # try:
     #     model.load_state_dict(torch.load("./params.pt"))

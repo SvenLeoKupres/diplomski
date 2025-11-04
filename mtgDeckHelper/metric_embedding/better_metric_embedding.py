@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.functional import one_hot
 from torch.nn.utils import clip_grad_norm_
 
-from metric_embedding.metric_embedding import load_data
+from metric_embedding import load_data
 
 PRINT_LOSS_N = 10
 
@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
     epoch_to_save = 20
 
-    epochs = 300
+    epochs = 10000
     for epoch in range(epochs):
         print(f"Epoch: {epoch}")
         train_loss = train(model, optimizer, train_loader, device, to_print=True)

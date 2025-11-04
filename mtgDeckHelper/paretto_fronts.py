@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pandasql as ps
 
+# from demos.fixed_effects_model import fe_model
+
 
 def divide_into_fronts(card_winrates):
     card_doms = dict()
@@ -108,6 +110,10 @@ if __name__ == "__main__":
                  'ORDER BY game_count DESC')
 
     card_winrates = ps.sqldf(query)
+
+    # df = decks.merge(games, on=["date", "player"])
+    # model = fe_model(df, 0)
+    # diff = model.coef_.sum(axis=0)
 
     card_names = card_winrates['card'].tolist()
     card_winrates.set_index('card', inplace=True)

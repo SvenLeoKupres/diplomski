@@ -1,243 +1,255 @@
-card
-Akoum Hellhound
-All That Glitters
-Ambush Viper
-Archmage Emeritus
-Bellowing Tanglewurm
-Bind the Monster
-Blasphemous Act
-Bloodline Pretender
-Cast Out
-Cathar's Call
-Cave of the Frost Dragon
-Curiosity
-Cyclone Summoner
-Dazzling Sphinx
-Didn't Say Please
-Dragonsguard Elite
-Embereth Shieldbreaker
-Epic Downfall
-Eye Collector
-Faerie Guide
-Frogify
-Frost Trickster
-"Ghalta, Primal Hunger"
-Gnottvold Recluse
-Gryff's Boon
-Gutterbones
-Hobgoblin Captain
-Iroas's Champion
-Izzet Chemister
-Jhoira's Familiar
-Kiln Fiend
-Koma's Faithful
-Legion's Landing
-Locthwain Paladin
-Maniacal Rage
-Minstrosity
-Murmuring Mystic
-Piper of the Swarm
-Professor of Zoomancy
-Queen Allenal of Ruadach
-Quirion Ranger
-Raging Redcap
-Rampant Growth
-Ravenform
-Relic Amulet
-Rural Recruit
-Sarulf's Packmate
-Scute Swarm
-Season of Growth
-Sedge Scorpion
-Selesnya Guildgate
-Sign in Blood
-Simic Growth Chamber
-Skull Raid
-Stormchaser Drake
-"Syr Alin, the Lion's Claw"
-"Targ Nar, Demon-Fang Gnoll"
-"Tergrid, God of Fright // Tergrid's Lantern"
-Toxic Deluge
-Uncaged Fury
-Unlucky Witness
-Usher of the Fallen
-Vampire Nighthawk
-Water Wings
-Wildwood Tracker
-Wizard Class
-Barge In
-Demonic Gifts
-Owlbear
-Parasitic Grasp
-Struggle for Skemfar
-The Huntsman's Redemption
-Youthful Knight
-Scorch Spitter
-Mage Duel
-Temple of Abandon
-Recommission
-Rabid Bite
-Smash to Dust
-Archon of Absolution
-Blazing Crescendo
-Etchings of the Chosen
-Gnawing Crescendo
-Ophiomancer
-Part the Waterveil
-Specter of Mortality
-Village Rites
-Dokuchi Shadow-Walker
-Hexdrinker
-Jungle Hollow
-Battlefield Raptor
-Welcoming Vampire
-Elite Spellbinder
-Inspiring Overseer
-Starnheim Courser
-Stalwart Valkyrie
-Steel-Plume Marshal
-Glorious Protector
-Zulaport Duelist
-Snaremaster Sprite
-Augury Owl
-Beyeen Veil // Beyeen Coast
-Cloudkin Seer
-Covert Technician
-Tome Raider
-Warden of Evos Isle
-"Lier, Disciple of the Drowned"
-Faerie Guidemother
-Watcher of the Spheres
-"Kangee, Sky Warden"
-Bloodbraid Elf
-You Find the Villains' Lair
-Jousting Dummy
-Wood Elves
-Winged Words
-Wavebreak Hippocamp
-Two-Handed Axe
-Treasure Cruise
-"Torens, Fist of the Angels"
-The Goose Mother
-Territorial Scythecat
-Temple of Mystery
-Temple of Epiphany
-Tangled Colony
-"Talrand, Sky Summoner"
-Soul-Scar Mage
-Sinister Sabotage
-Shackles of Treachery
-Serum Visions
-Run Amok
-Rugged Highlands
-Return to Action
-Reclamation Sage
-Prosperous Innkeeper
-Prismari Campus
-Power Word Kill
-Ponder
-Paladin of Atonement
-Oracle of Mul Daya
-Negate
-Mystic Reflection
-Murder
-Legion Warboss
-Kiora Bests the Sea God
-"Jolrael, Voice of Zhalfir"
-Inferno Titan
-Heraldic Banner
-Fireblade Artist
-Essence Warden
-Essence Pulse
-Earthshaker Khenra
-Duskwielder
-Dismal Backwater
-"Dina, Soul Steeper"
-Deadly Dispute
-Claim the Firstborn
-Branching Evolution
-Blossoming Sands
-Beast Whisperer
-Avaricious Dragon
-Arboreal Grazer
-Goldspan Dragon
-Dreamshackle Geist
-Gryff Rider
-Infiltration Lens
-Rimrock Knight
-Foulmire Knight
-Valiant Knight
-Blacklance Paragon
-Knight of Dusk's Shadow
-History of Benalia
-Hyena Umbra
-Knight Exemplar
-Kaya's Onslaught
-Ardenvale Tactician
-Smitten Swordmaster
-Corpse Knight
-Acclaimed Contender
-Accorder Paladin
-"Thalia, Heretic Cathar"
-Adamant Will
-Adaptive Automaton
-"Balmor, Battlemage Captain"
-Belle of the Brawl
-Bitter Triumph
-Bygone Bishop
-Cemetery Illuminator
-Creeping Bloodsucker
-Cult Conscript
-Dauntless Unity
-Distracting Geist
-Entreat the Angels
-Forsworn Paladin
-Foundry Inspector
-Geistlight Snare
-Gods Willing
-Halimar Depths
-Hanged Executioner
-Hunter's Blowgun
-Inquisitive Puppet
-Intrepid Adversary
-Iron Apprentice
-Iron Verdict
-"Katilda, Dawnhart Martyr"
-Lantern Bearer
-Lovestruck Beast
-Marauding Blight-Priest
-Mausoleum Wanderer
-Metallic Mimic
-Midnight Haunting
-Midnight Reaper
-"Millicent, Restless Revenant"
-Nebelgast Herald
-Niblis of the Urn
-Patrician Geist
-Rattlechains
-Remorseful Cleric
-Royal Assassin
-Sanguine Bond
-Shacklegeist
-Solemn Simulacrum
-Spell Queller
-Spectral Arcanist
-"Sram, Senior Edificer"
-Supreme Phantom
-Sword of Vengeance
-"Thalia, Guardian of Thraben"
-Twinscroll Shaman
-Unclaimed Territory
-Venerable Knight
-Wild-Magic Sorcerer
-Windborn Muse
-Wintermoor Commander
-Witch's Oven
-Territorial Allosaurus
-Empyrean Eagle
-Drogskol Captain
-Goblin Electromancer
-"Greta, Sweettooth Scourge"
-Guardian of Faith
-Mortality Spear
-Sproutback Trudge
+card,color
+Akoum Hellhound,R
+All That Glitters,W
+Ambush Viper,G
+Archmage Emeritus,U
+Bellowing Tanglewurm,G
+Bind the Monster,U
+Blasphemous Act,R
+Bloodline Pretender,
+Cast Out,B
+Cathar's Call,W
+Cave of the Frost Dragon,W
+Curiosity,U
+Cyclone Summoner,U
+Dazzling Sphinx,U
+Didn't Say Please,U
+Dragonsguard Elite,G
+Embereth Shieldbreaker,R
+Epic Downfall,B
+Eye Collector,B
+Frogify,U
+Frost Trickster,U
+"Ghalta, Primal Hunger",G
+Gnottvold Recluse,G
+Gryff's Boon,W
+Gutterbones,B
+Hobgoblin Captain,R
+Iroas's Champion,RW
+Izzet Chemister,R
+Jhoira's Familiar,
+Kiln Fiend,R
+Koma's Faithful,B
+Legion's Landing,W
+Locthwain Paladin,B
+Maniacal Rage,R
+Minstrosity,B
+Murmuring Mystic,U
+Piper of the Swarm,B
+Professor of Zoomancy,G
+Queen Allenal of Ruadach,GW
+Quirion Ranger,G
+Raging Redcap,R
+Rampant Growth,G
+Ravenform,U
+Relic Amulet,
+Rural Recruit,G
+Sarulf's Packmate,G
+Scute Swarm,G
+Season of Growth,G
+Sedge Scorpion,G
+Selesnya Guildgate,GW
+Sign in Blood,B
+Simic Growth Chamber,GU
+Skull Raid,B
+Stormchaser Drake,U
+"Syr Alin, the Lion's Claw",W
+"Targ Nar, Demon-Fang Gnoll",GR
+"Tergrid, God of Fright // Tergrid's Lantern",B
+Toxic Deluge,B
+Uncaged Fury,R
+Unlucky Witness,R
+Usher of the Fallen,W
+Vampire Nighthawk,B
+Water Wings,U
+Wildwood Tracker,G
+Wizard Class,U
+Barge In,R
+Demonic Gifts,B
+Owlbear,G
+Parasitic Grasp,B
+Struggle for Skemfar,G
+The Huntsman's Redemption,G
+Youthful Knight,W
+Scorch Spitter,R
+Mage Duel,G
+Temple of Abandon,GR
+Recommission,W
+Rabid Bite,G
+Smash to Dust,R
+Archon of Absolution,W
+Blazing Crescendo,R
+Etchings of the Chosen,BW
+Gnawing Crescendo,R
+Ophiomancer,B
+Part the Waterveil,U
+Specter of Mortality,B
+Village Rites,B
+Dokuchi Shadow-Walker,B
+Hexdrinker,G
+Jungle Hollow,BG
+Battlefield Raptor,W
+Elite Spellbinder,W
+Inspiring Overseer,W
+Starnheim Courser,W
+Stalwart Valkyrie,W
+Steel-Plume Marshal,W
+Glorious Protector,W
+Zulaport Duelist,U
+Snaremaster Sprite,U
+Augury Owl,U
+Beyeen Veil // Beyeen Coast,U
+Cloudkin Seer,U
+Covert Technician,U
+Tome Raider,U
+Warden of Evos Isle,U
+"Lier, Disciple of the Drowned",U
+Faerie Guidemother,W
+Watcher of the Spheres,UW
+"Kangee, Sky Warden",UW
+Bloodbraid Elf,GR
+You Find the Villains' Lair,U
+Jousting Dummy,
+Wood Elves,G
+Winged Words,U
+Wavebreak Hippocamp,U
+Two-Handed Axe,R
+Treasure Cruise,U
+"Torens, Fist of the Angels",GW
+The Goose Mother,GU
+Territorial Scythecat,G
+Temple of Mystery,GU
+Temple of Epiphany,RU
+Tangled Colony,B
+"Talrand, Sky Summoner",U
+Soul-Scar Mage,R
+Sinister Sabotage,U
+Shackles of Treachery,R
+Serum Visions,U
+Rugged Highlands,GR
+Return to Action,B
+Reclamation Sage,G
+Prosperous Innkeeper,G
+Prismari Campus,UR
+Power Word Kill,B
+Ponder,U
+Paladin of Atonement,W
+Oracle of Mul Daya,G
+Negate,U
+Mystic Reflection,U
+Murder,B
+Legion Warboss,R
+Kiora Bests the Sea God,U
+"Jolrael, Voice of Zhalfir",GU
+Inferno Titan,R
+Heraldic Banner,
+Fireblade Artist,BR
+Essence Warden,G
+Essence Pulse,B
+Earthshaker Khenra,R
+Duskwielder,B
+Dismal Backwater,BU
+"Dina, Soul Steeper",BG
+Deadly Dispute,B
+Claim the Firstborn,R
+Branching Evolution,G
+Blossoming Sands,GW
+Beast Whisperer,G
+Avaricious Dragon,R
+Arboreal Grazer,G
+Goldspan Dragon,R
+Dreamshackle Geist,U
+Gryff Rider,W
+Infiltration Lens,
+Rimrock Knight,R
+Foulmire Knight,B
+Valiant Knight,W
+Blacklance Paragon,B
+Knight of Dusk's Shadow,B
+History of Benalia,W
+Hyena Umbra,W
+Knight Exemplar,W
+Kaya's Onslaught,W
+Ardenvale Tactician,W
+Smitten Swordmaster,B
+Corpse Knight,B
+Acclaimed Contender,W
+Accorder Paladin,W
+"Thalia, Heretic Cathar",W
+Adamant Will,W
+Adaptive Automaton,
+"Balmor, Battlemage Captain",RU
+Belle of the Brawl,B
+Bitter Triumph,B
+Bygone Bishop,W
+Cemetery Illuminator,U
+Creeping Bloodsucker,B
+Cult Conscript,B
+Dauntless Unity,W
+Distracting Geist,W
+Entreat the Angels,W
+Forsworn Paladin,B
+Foundry Inspector,
+Geistlight Snare,U
+Gods Willing,W
+Halimar Depths,U
+Hanged Executioner,W
+Hunter's Blowgun,
+Inquisitive Puppet,
+Intrepid Adversary,W
+Iron Apprentice,
+Iron Verdict,W
+"Katilda, Dawnhart Martyr",W
+Lantern Bearer,U
+Lovestruck Beast,G
+Marauding Blight-Priest,B
+Mausoleum Wanderer,U
+Metallic Mimic,
+Midnight Haunting,W
+Midnight Reaper,B
+"Millicent, Restless Revenant",UW
+Nebelgast Herald,U
+Niblis of the Urn,W
+Patrician Geist,U
+Rattlechains,U
+Remorseful Cleric,W
+Royal Assassin,B
+Sanguine Bond,B
+Shacklegeist,U
+Solemn Simulacrum,
+Spell Queller,BU
+Spectral Arcanist,U
+"Sram, Senior Edificer",W
+Supreme Phantom,U
+Sword of Vengeance,
+"Thalia, Guardian of Thraben",W
+Twinscroll Shaman,R
+Unclaimed Territory,
+Venerable Knight,W
+Wild-Magic Sorcerer,R
+Windborn Muse,W
+Wintermoor Commander,BW
+Witch's Oven,
+Territorial Allosaurus,G
+Empyrean Eagle,UW
+Drogskol Captain,UW
+Goblin Electromancer,RU
+"Greta, Sweettooth Scourge",BG
+Guardian of Faith,W
+Mortality Spear,BG
+Sproutback Trudge,G
+Bristlebud Farmer,G
+"Inti, Seneschal of the Sun",R
+"Aclazotz, Deepest Betrayal",B
+You Hear Something on Watch,W
+Luminarch Aspirant,W
+Dark Ritual,B
+Elder Gargaroth,G
+Digsite Engineer,W
+Manaform Hellkite,R
+"Mikaeus, the Lunarch",W
+"Teferi, Mage of Zhalfir",U
+"Thousand-Faced Shadow",U
+"Koma, Cosmos Serpent",GU
+Carnage Tyrant,G
+Vein Ripper,B
