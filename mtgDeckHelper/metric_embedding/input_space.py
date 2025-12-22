@@ -6,6 +6,9 @@ import numpy as np
 
 
 class InputSpace:
+    """
+    A way to transform the inputs so as not to just be one-hot encoded, in order to shrink it
+    """
     def __init__(self, data):
         self.data = data
 
@@ -16,6 +19,9 @@ class InputSpace:
         raise NotImplementedError
 
 class OneHotInputSpace(InputSpace):
+    """
+    Does nothing
+    """
     def __init__(self, data):
         super().__init__(data)
 
@@ -23,6 +29,22 @@ class OneHotInputSpace(InputSpace):
         pass
 
     def input_size(self):
+        return len(self.data)
+
+class BinaryInputSpace(InputSpace):
+    """
+    Transforms from one-hot encoded data to binary encoded data.
+    For instance, 10000 (fifth bit is 1, all others 0) would be transformed into 101 (5 in binary)
+    """
+    def __init__(self, data):
+        super().__init__(data)
+
+    def transform(self):
+        #TODO
+        pass
+
+    def input_size(self):
+        #TODO
         return len(self.data)
 
 if __name__=='__main__':

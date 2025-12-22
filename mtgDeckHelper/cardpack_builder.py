@@ -6,12 +6,15 @@ import pandas as pd
 
 from card_pool import CardPool
 # from evaluation.assess_metric import MetricEmbeddingAssessor
-from window import Window, PreconstructedWindow
+from window import ProperWindow, PreconstructedWindow
 from assessor_classes import BasicAssessor, FixedEffectsAssessor, SimpleMetricEmbeddingAssessor, ParettoFrontAssessor, \
     FixedEffectsParettoFrontAssessor, CompositeAssessor, AbstractAssessor
 
 
 class TextBuilder:
+    """
+    Used to track the draft and save how it went.
+    """
     def __init__(self, num_players, num_rounds, card_pool, removed, num_cards_per_pack=15):
         self.num_players = num_players
         self.num_rounds = num_rounds
@@ -22,30 +25,53 @@ class TextBuilder:
         self.removed.add_change_listener(self.update_removed)
         self.text = f"num_players: {num_players}\nnum_rounds: {num_rounds}\nnum_cards_per_pack: {num_cards_per_pack}\n"
 
-    def update_card_pool(self):
+    def update_card_pool(self) -> None:
+        """
+        Save the card name that was picked by the player
+        """
         self.text += f"added: {self.card_pool.cards[-1]}\nremoved: "
         # if len(self.card_pool.cards) == self.num_rounds*15:
         #     self.save()
 
-    def update_removed(self):
+    def update_removed(self) -> None:
+        """
+        Save the card name picked by the other players
+        """
         self.text += f"{self.removed.cards[-1]}; "
         n = self.num_players
         if len(self.removed.cards) == self.num_rounds*self.num_cards_per_pack*(n-1) - (self.num_rounds * ((n-2)*(n-1)+n*(n-1)) // 2):
             self.save()
 
-    def save(self):
-        with open("./draft", 'w') as f:
+    def save(self, path='./draft') -> None:
+        """
+        Save the draft in a file
+        :param path: path to the file where to save the draft
+        """
+        with open(path, 'w') as f:
             f.write(self.text)
 
 
-def save(packs, num_players, num_rounds, num_cards_per_pack, path='./packs'):
+def save_pack(packs:[], num_players:int, num_rounds:int, num_cards_per_pack:int, path:str= './packs') -> None:
+    """
+    Save the packs to be able to reproduce the draft
+    :param packs: list of all the cards in order
+    :param num_players: total number of players
+    :param num_rounds: total number of rounds
+    :param num_cards_per_pack: number of cards per pack
+    :param path: where to save the draft
+    """
     data = f"{num_players};{num_rounds};{num_cards_per_pack};{packs[0]}"
     for index in range(1, len(packs)):
         data += f";{packs[index]}"
     with open(path, 'w') as f:
         f.write(data)
 
-def load(path = './packs'):
+def load_pack(path ='./packs') -> (int, int, int, str):
+    """
+    Load the packs to be able to reproduce the draft
+    :param path: path to the file where the draft is saved
+    :return: in order: number of players, number of rounds, number of cards per pack, list of cards in order of appearance
+    """
     try:
         with open(path, 'r') as f:
             packs = f.read()
@@ -73,9 +99,9 @@ def real_main(start_root, num_players_spinbox, rounds_spinbox, cards_spinbox, mo
     removed_cards = CardPool(cube) # pool of cards selected by other players
 
     # assessor = AbstractAssessor(cube, card_pool, removed_cards)
-    # assessor_fixed_pareto = FixedEffectsParettoFrontAssessor(cube, card_pool, removed_cards)
+    # assessor = FixedEffectsParettoFrontAssessor(cube, card_pool, removed_cards)
     # assessor = FixedEffectsAssessor(cube, card_pool, removed_cards)
-    # assessor = ParettoFrontAssessor(cube, card_pool, removed_cards)
+    assessor = ParettoFrontAssessor(cube, card_pool, removed_cards)
     # assessor1 = BasicAssessor(cube, card_pool, removed_cards, color_num=1)
     # assessor3 = BasicAssessor(cube, card_pool, removed_cards, color_num=3)
     # assessor = CompositeAssessor(cube, card_pool, removed_cards, {"color_num=1": assessor1, "color_num=3": assessor3})
@@ -86,18 +112,18 @@ def real_main(start_root, num_players_spinbox, rounds_spinbox, cards_spinbox, mo
     # assessor20 = BasicAssessor(cube, card_pool, removed_cards, color_num=20)
     # assessor = CompositeAssessor(cube, card_pool, removed_cards, {"color_num=0": assessor0, "color_num=20": assessor20})
     # assessor = CompositeAssessor(cube, card_pool, removed_cards, {"metric embedding":assessor_metric, "fixed effects pareto":assessor_fixed_pareto, "basic":assessor5})
-    assessor = SimpleMetricEmbeddingAssessor(cube, card_pool, removed_cards)
+    # assessor = SimpleMetricEmbeddingAssessor(cube, card_pool, removed_cards)
 
     # create the main window
     if mode=="game":
-        root = Window(cube.index.tolist(), num_players, card_pool, removed_cards, assessor, False, num_rounds)
+        root = ProperWindow(cube.index.tolist(), num_players, card_pool, removed_cards, assessor, False, num_rounds)
     elif mode=="random":
         shuffled_packs = cube.index.tolist()
         shuffled_packs = random.sample(shuffled_packs, num_cards*num_players*num_rounds)
         # save(shuffled_packs, num_players, num_rounds, num_cards)
         root = PreconstructedWindow(shuffled_packs, num_players, card_pool, removed_cards, assessor, num_rounds, num_cards)
     elif mode=="load file":
-        num_players, num_rounds, num_cards, packs = load()
+        num_players, num_rounds, num_cards, packs = load_pack()
         root = PreconstructedWindow(packs, num_players, card_pool, removed_cards, assessor, num_rounds, num_cards)
     else:
         raise ValueError("Invalid game mode")

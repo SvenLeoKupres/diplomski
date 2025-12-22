@@ -12,6 +12,25 @@ from metric_embedding.better_metric_embedding import ContrastiveCardIndexEmbeddi
 from metric_embedding.metric_embedding import load_data
 
 
+def remove_from_dummy_data(df:pd.DataFrame, cube:pd.DataFrame, count) -> pd.DataFrame:
+    """
+    Remove all but the top "count" cards from the data, decided by the number of decks a card appeared in (only the cards with the most decks stay in the dataset)
+    :param df: dataframe merging the decks and games dataframes on date and player
+    :param cube: dataframe listing all the cards in the current cube. These cards cannot be removed from the dataset at any cost
+    :param count: count of cards to stay in the dataset. If the number is equal to or smaller than the number of cards in the current cube, prunes the dataset to just those cards
+    :return: pruned dataset
+    """
+    count = count - len(cube)
+
+    count_per_card = df.sum(axis=0).rename('count').sort_values(ascending=False)
+    # count_per_card = count_per_card[count_per_card.loc[:, 'card'] > threshold]
+    flags = ~count_per_card.index.isin(cube.index)
+    count_per_card = count_per_card[flags]
+    selected = count_per_card.head(max(0, count))
+
+    return df[selected.index.tolist() + cube.index.tolist()]
+
+
 class MetricEmbeddingAssessor(AbstractAssessor):
     def __init__(self, cube, card_pool, removed, decks, games, model, num_closest_cards=0):
         super().__init__(cube, card_pool, removed)
@@ -86,18 +105,6 @@ class MetricEmbeddingAssessor(AbstractAssessor):
 #     games.set_index(['date', 'player'], inplace=True)
 #
 #     return cube, decks, games
-
-
-def remove_from_dummy_data(df, cube, count):
-    count = count - len(cube)
-
-    count_per_card = df.sum(axis=0).rename('count').sort_values(ascending=False)
-    # count_per_card = count_per_card[count_per_card.loc[:, 'card'] > threshold]
-    flags = ~count_per_card.index.isin(cube.index)
-    count_per_card = count_per_card[flags]
-    selected = count_per_card.head(max(0, count))
-
-    return df[selected.index.tolist() + cube.index.tolist()]
 
 
 if __name__=='__main__':

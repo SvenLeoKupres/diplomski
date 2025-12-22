@@ -1,5 +1,5 @@
-import math
 from random import choice, randint
+from typing_extensions import deprecated
 
 import numpy as np
 import pandas as pd
@@ -13,7 +13,7 @@ from torch.nn.utils import clip_grad_norm_
 PRINT_LOSS_N = 10
 
 
-def load_data():
+def load_data() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
     cube = pd.read_csv('../alahamaretov_arhiv/cube.csv',
                        usecols=['name', 'CMC', 'Type', 'Color'],
                        dtype={'name': 'str', 'CMC': 'int', 'Type': 'str', 'Color': 'str'})
@@ -38,8 +38,13 @@ def load_data():
     return cube, decks, games
 
 
-def get_random_tensor_with_one_at(index, tensor_list):
-    # Filter tensors where any row has a 1 at the specified column index
+def get_random_tensor_with_one_at(index:int, tensor_list: []) -> torch.Tensor:
+    """
+    Filter tensors where any row has a 1 at the specified column index
+    :param index: the index where the tensor has to have a 1
+    :param tensor_list: list of tensors from which to randomly sample
+    :return: a random tensor from the list that has a 1 at the specified index. returns None if no tensor in the list satisfies the restriction
+    """
     filtered = [t for t in tensor_list if t[:, index].any()]
 
     if not filtered:
@@ -49,7 +54,12 @@ def get_random_tensor_with_one_at(index, tensor_list):
     return choice(filtered)
 
 
-def elongate_vector(vector):
+def elongate_vector(vector: []) -> torch.Tensor:
+    """
+    Turns a vector into a one-hot encoded tensor using the left-most non-zero element
+    :param vector: array to turn into a tensor
+    :return: a one-hot encoded torch tensor of the given vector
+    """
     # matrix = [[1 if i==k and vector[i]==1 else 0 for i in range(len(vector))] for k in range(len(vector))]
     # # return matrix
     #
@@ -67,8 +77,14 @@ def elongate_vector(vector):
     # Create one-hot encodings
     return one_hot(indices, num_classes=vector.size(0))
 
-
+@deprecated("ContrastiveCardIndexEmbeddingDataset is superior")
 class CardIndexEmbeddingDataset(Dataset):
+    """
+    Dataset which is used to generate batches and sample data combined with the card embedding network.
+    Samples positive and negative examples (cards) by choosing a random row, checking it against the threshold (>threshold -> positive example, negative otherwise).
+    If the datapoint is not of the correct quality, chooses a new random one. If no datapoints fit the criteria, chooses a random card and the target (winrate) is 0.
+    Data is a tensor in the form [deck, cards]. The first dimension is a deck, the second dimension is the cards within the deck (1 if card is present, 0 otherwise)
+    """
     def __init__(self, data, targets, calculate_winrate='mean', threshold=0.5, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -135,7 +151,7 @@ class CardIndexEmbeddingDataset(Dataset):
         check_function = lambda a, b: a>=b
         return self._sample(index, check_function)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index:int):
         """Indexes by card. If index is of a card which was never played, return null.
         Otherwise, returns it, a positive and a negative sample with average winrate of both the anchor and sample cards in decks"""
         # if self.data[:, index].sum() == 0:
@@ -151,11 +167,14 @@ class CardIndexEmbeddingDataset(Dataset):
 
         return anchor, positive, negative, target_positive, target_negative
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.data.shape[1]
 
-
+@deprecated("ContrastiveMetricEmbedding is superior, since the triplet loss function is inefficient")
 class SimpleMetricEmbedding(nn.Module):
+    """
+    Simple neural network which trains the embeddings of cards using a triplet loss function.
+    """
     def __init__(self, card_num, emb_size=32, margin=1, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.emb_size = emb_size
@@ -169,15 +188,32 @@ class SimpleMetricEmbedding(nn.Module):
                                     nn.Linear(self.card_num//2, emb_size))
         self.requires_grad_(True)
 
-    def forward(self, data):
+    def forward(self, data:torch.Tensor) -> torch.Tensor:
+        """
+        pass the data through the network
+        :param data: dimensions BATCH_SIZE x CARD_NUM
+        :return: dimensions BATCH_SIZE x EMB_SIZE
+        """
         return self.layers(data)
 
     def get_features(self, data):
-        """Returns tensor with dimensions BATCH_SIZE, EMB_SIZE"""
+        """
+        Returns tensor with dimensions BATCH_SIZE, EMB_SIZE
+        :param data: Function to call
+        :return: same as forward function
+        """
         x = self.forward(data)
         return x
 
-    def loss(self, anchor, positive, negative, t_p, t_n):
+    def loss(self, anchor:torch.Tensor, positive:torch.Tensor, negative:torch.Tensor, t_p:torch.Tensor, t_n:torch.Tensor):
+        """
+        :param anchor: a tensor representing a card, dimensions BATCH_SIZE x CARD_NUM
+        :param positive: a tensor representing a card, where the average winrate of a deck that contains both it and the anchor, is positive
+        :param negative: a tensor representing a card, where the average winrate of a deck that contains both it and the anchor, is negative
+        :param t_p: average winrate of a deck that contains both the anchor and the positive, dimensions BATCH_SIZE
+        :param t_n: average winrate of a deck that contains both the anchor and the negative, dimensions BATCH_SIZE
+        :return: average triplet loss per each datapoint in the batch
+        """
         a_x = self.get_features(anchor)
         p_x = self.get_features(positive)
         n_x = self.get_features(negative)

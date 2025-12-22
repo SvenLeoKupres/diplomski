@@ -3,6 +3,9 @@ from tkinter import ttk
 
 
 class AutocompleteCombobox(ttk.Combobox):
+    """
+    The textbox with an inbuilt list of names. Writing one will autocomplete it. Can also simply select an option from the list without writing it
+    """
     def __init__(self, parent, completion_list, **kwargs):
         super().__init__(parent, **kwargs)
         self._completion_list = sorted(completion_list)
@@ -12,7 +15,10 @@ class AutocompleteCombobox(ttk.Combobox):
         self.configure(values=self._completion_list)
         self.bind('<KeyRelease>', self.handle_keyrelease)
 
-    def autocomplete(self):
+    def autocomplete(self) -> None:
+        """
+        Check the list of names against the list of completions and complete it
+        """
         curr_string = self.get().lower()
 
         # collect hits
@@ -28,7 +34,11 @@ class AutocompleteCombobox(ttk.Combobox):
             self.select_range(len(curr_string), tk.END)
             self.icursor(len(curr_string))
 
-    def handle_keyrelease(self, event):
+    def handle_keyrelease(self, event) -> None:
+        """
+        listen for keypress events
+        :param event: the event to decide which key was pressed
+        """
         if event.keysym in ("BackSpace", "Left", "Right", "Up", "Down"):
             return
         self.autocomplete()

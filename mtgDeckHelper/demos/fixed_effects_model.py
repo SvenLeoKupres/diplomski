@@ -16,8 +16,6 @@ def smooth_winrate(alpha=0):
 
 
 def fe_model(df, alpha):
-
-
     player_wr = df.groupby("player").apply(smooth_winrate(alpha)).rename("winrate")
     daily_player_wr = df.groupby(["date", "player"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
     daily_player_wr['winrate'] = daily_player_wr.index.get_level_values('player').map(player_wr)
@@ -58,7 +56,8 @@ if __name__=='__main__':
     games.set_index(['date', 'player'], inplace=True)
 
     df = decks.merge(games, on=["date", "player"])
-    model = fe_model(df, 0)
+    alpha = 0
+    model = fe_model(df, alpha)
     # print(model.score(X, y))
     # print(model.coef_)
     # print(model.intercept_)

@@ -6,7 +6,16 @@ import assessor_classes
 
 # part of the code from https://blog.finxter.com/5-best-ways-to-display-a-message-when-hovering-over-something-with-mouse-cursor-in-tkinter-python/
 class CardInformation:
-    def __init__(self, widget, cardname, assessor):
+    """
+    A popup that displays assessor information about a card
+    """
+    def __init__(self, widget, cardname:str, assessor:assessor_classes.AbstractAssessor):
+        """
+
+        :param widget: Above what to hover to display infomation
+        :param cardname: name of the card being assessed
+        :param assessor: assessor from which information is being gathered
+        """
         self.widget = widget
         self.cardname = cardname
         self.assessor = assessor
@@ -15,7 +24,11 @@ class CardInformation:
         self.widget.bind("<Leave>", self.leave)
         self.tooltip_window = None
 
-    def enter(self, event=None):
+    def enter(self, event=None) -> None:
+        """
+        Displays infomation
+        :param event: not relevant for the function of this method. Used to learn from whence the activation came
+        """
         x, y, cx, cy = self.widget.bbox("insert")
         x += self.widget.winfo_rootx() + 25
         y += self.widget.winfo_rooty() + 20
@@ -37,13 +50,20 @@ class CardInformation:
                          background='#ffffff', relief='solid', borderwidth=1,
                          font=("tahoma", "8", "normal"))
         label.pack(ipadx=1)
-    def leave(self, event=None):
+    def leave(self, event=None) -> None:
+        """
+        Removes the information from the screen
+        :param event: not relevant for the function of this method. Used to learn from whence the activation came
+        """
         if self.tooltip_window:
             self.tooltip_window.destroy()
 
 
 class CardDataFrame(ttk.Frame):
-    def __init__(self, parent, img, cardname, assessor, *args, **kwargs):
+    """
+    A part of a pack. Displays card image, card name, and incorporates a button which allows the card to be picked as part of the draft
+    """
+    def __init__(self, parent, img, cardname:str, assessor:assessor_classes.AbstractAssessor, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
         self.canvas = tk.Label(self, image=img)
@@ -67,11 +87,17 @@ class CardDataFrame(ttk.Frame):
         for k in self.listeners:
             k()
 
-    def add_listener(self, func):
+    def add_listener(self, func:callable) -> None:
+        """
+
+        :param func: function to activate upon button press. Must be callable
+        """
         self.listeners.append(func)
 
-    def toggle_button_text(self):
-        """Toggles button text between "PICK" and "REMOVED" """
+    def toggle_button_text(self) -> None:
+        """
+        Toggles button text between "PICK" and "REMOVED" based on the pack mode
+        """
 
         if self.button_text == "PICK":
             self.button_text = "REMOVE"
@@ -80,10 +106,18 @@ class CardDataFrame(ttk.Frame):
             self.button_text = "PICK"
             self.button.configure(text="PICK")
 
-    def get_cardname(self):
+    def get_cardname(self) -> str:
+        """
+
+        :return: name of the card this frame displays information on
+        """
         return self.card_information.cardname
 
-    def set_background_color(self, color):
+    def set_background_color(self, color) -> None:
+        """
+        Change the background color of the button. Used mainly to easily identify which card is the best pick from the pack
+        :param color: Color to change the button to
+        """
         self.button.config(bg=color)
 
     # def set_card_score(self, num):

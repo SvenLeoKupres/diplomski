@@ -1,16 +1,19 @@
 import numpy as np
 import pandas as pd
 import torch
-from sklearn.linear_model import LinearRegression
 from torch.nn.functional import one_hot
 
 import paretto_fronts
 from card_pool import CardPool
-# from display_classes import Window
+from demos.fixed_effects_model import fe_model
 from metric_embedding.metric_embedding import SimpleMetricEmbedding
 
 
-def loadDataFromFiles():
+def loadDataFromFiles() -> [pd.DataFrame, pd.DataFrame]:
+    """
+
+    :return: decks and games from the excel file alahamaretov_arhiv/shoebox.xlsx
+    """
     decks = pd.read_excel(io='./alahamaretov_arhiv/shoebox.xlsx',
                           sheet_name='Decks',
                           usecols=['date', 'player', 'card'],
@@ -31,27 +34,53 @@ def loadDataFromFiles():
     return decks, games
 
 
-def smooth_winrate(alpha=1):
+def smooth_winrate(alpha:float=1):
+    """
+    A function working as a functional interface for winrate calculation and smoothing
+    :param alpha: the smoothing coefficient, default 1
+    :return: a function which accepts a dataframe with columns "wins" and "losses" and returns a new column representing the winrate,
+    smoothed with the alpha coefficient
+    """
+
     def winrate(g: pd.DataFrame):
         return (g["wins"].sum() + alpha) / (g["wins"].sum() + g["losses"].sum() + 2*alpha)
 
     return winrate
 
-def extract_game_count(decks, games):
+def extract_game_count(decks, games) -> pd.DataFrame:
+    """
+
+    :param decks: Pandas dataframe containing the decks played
+    :param games: Pandas dataframe listing match results
+    :return: Total number of games played for each card
+    """
     df = decks.merge(games, on=["date", "player"])
     return df.groupby(["card"]).apply(
         lambda g: g["wins"].sum() + g["losses"].sum()
     ).rename("game_count")
 
 
-def extract_deck_count(decks):
+def extract_deck_count(decks) -> pd.Series:
+    """
+    Calculates the number of decks each card is present in
+    :param decks: dataframe with at least a "card" column
+    :return: a series with "card" as the key and a column "deck_count"
+    """
     return decks.groupby(["card"])['card'].count().rename("deck_count")
 
 
-def add_color_bonus(assessor, cardname, color_num=1):
+def add_color_bonus(assessor, cardname:str, color_num:float=1) -> float:
+    """
+    Calculates the additional score for a card based on its colors and the colors of drafted cards
+    :param assessor: assessor used to calculate score. It contains both the data on the drafted cards, and the cards in the cube and their colors
+    :param cardname: name of the considered card
+    :param color_num: strength of the color bonus, default 1, that is 1 additional point for each card of the considered card's colors in the pool
+    (multicolored cards in the pool are only counted once)
+    :return: the considered card's bonus score
+    """
     colors = assessor.card_pool.get_color_dict()
     card_color = assessor.cube.loc[cardname, "color"]
-    if type(card_color) is float:
+    if type(card_color) is float:   # if card is colorless
         return 0
 
     color_bonus = 0
@@ -60,18 +89,23 @@ def add_color_bonus(assessor, cardname, color_num=1):
 
     return color_bonus*color_num
 
-def static_calculate_card_score(assessor, cardname):
-    """Calculates card score based on the assessor data about the cardname's Paretto front and how many colors in the picked pool it shares a color with"""
-    score = len(assessor.fronts)
+def static_calculate_pareto_card_score(assessor, cardname:str) -> int:
+    """
+    Calculates card score based on the assessor data about the cardname's Paretto front and how many colors in the picked pool it shares a color with
+    :param assessor: assessor used to calculate score
+    :param cardname: name of the considered card
+    :return: the card score based on the pareto front"""
 
-    k = 0
-    while k < score and cardname not in assessor.fronts[k]:
-        k += 1
-
-    return score - k
+    return max(assessor.fronts['front']) - assessor.fronts.at[cardname, 'front']
 
 
-def static_form_basic_text(score, color_bonus):
+def static_form_basic_text(score:float, color_bonus:float) -> str:
+    """
+
+    :param score: Basic card score
+    :param color_bonus: Color bonus for the card
+    :return: Basic stringified card score
+    """
     text = f"Basic score: {score}\n"
     text += f"Color bonus: {color_bonus}\n\n"
     text += f"Total: {score + color_bonus}"
@@ -81,22 +115,32 @@ def static_form_basic_text(score, color_bonus):
 
 class AbstractAssessor:
     """based on provided context, calculates the score for a given card"""
-    def __init__(self, cube, card_pool, removed):
+    def __init__(self, cube:pd.DataFrame, card_pool:CardPool, removed:CardPool):
         self.cube = cube
         self.card_pool = card_pool
         self.removed = removed
 
-    def result_string(self, cardname):
+    def result_string(self, cardname: str) -> str:
+        """
+        Stringifies the card score
+        :param cardname: name of the considered card
+        :return: String representation of the card score
+        """
         return static_form_basic_text(0, add_color_bonus(self, cardname, 1))
 
-    def calculate_card_score(self, cardname):
+    def calculate_card_score(self, cardname) -> float:
+        """
+        Calculates the card score for a given card
+        :param cardname: name of the considered card
+        :return: score of the considered card
+        """
         return add_color_bonus(self, cardname, 1)
 
 
 class BasicAssessor(AbstractAssessor):
-    """Calculates the score for a given card based on base winrate.
+    """Calculates the score for a given card based on base (or smoothed) winrate.
         On top of that, gives an advantage to colors which are already in the card pool"""
-    def __init__(self, cube, card_pool, removed, color_num=1, alpha=1, relevant_digits = 2):
+    def __init__(self, cube, card_pool, removed, color_num:float=1, alpha:float=1, relevant_digits=2):
         super().__init__(cube, card_pool, removed)
 
         self.color_num = color_num
@@ -126,7 +170,7 @@ class ParettoFrontAssessor(AbstractAssessor):
         Uses Paretto fronts (the criteria are the amount of decks a card has been played in and card winrate)
         to divide the cards into tiers.
         On top of that, gives an advantage to colors which are already in the card pool"""
-    def __init__(self, cube, card_pool, removed, color_num=1, alpha=1):
+    def __init__(self, cube, card_pool, removed, color_num:float=1, alpha:float=1):
         super().__init__(cube, card_pool, removed)
 
         self.color_num = color_num
@@ -151,31 +195,16 @@ class ParettoFrontAssessor(AbstractAssessor):
         self.fronts = paretto_fronts.divide_into_fronts(card_stats)
 
     def result_string(self, cardname):
-        return static_form_basic_text(static_calculate_card_score(self, cardname), add_color_bonus(self, cardname, self.color_num))
+        return static_form_basic_text(static_calculate_pareto_card_score(self, cardname), add_color_bonus(self, cardname, self.color_num))
 
     def calculate_card_score(self, cardname):
-        return static_calculate_card_score(self, cardname) + add_color_bonus(self, cardname, self.color_num)
+        return static_calculate_pareto_card_score(self, cardname) + add_color_bonus(self, cardname, self.color_num)
 
-
-def fixed_effects_model(df, alpha):
-    player_wr = df.groupby("player").apply(smooth_winrate(alpha)).rename("winrate")
-    daily_player_wr = df.groupby(["date", "player"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
-    daily_player_wr['winrate'] = daily_player_wr.index.get_level_values('player').map(player_wr)
-    daily_player_wr["lift"] = daily_player_wr["daily_winrate"] - daily_player_wr["winrate"]
-
-    card_wr = df.groupby(["card"]).apply(smooth_winrate(alpha)).rename("winrate")
-    daily_card_wr = df.groupby(["date", "card"]).apply(smooth_winrate(alpha)).rename("daily_winrate").to_frame()
-    daily_card_wr["winrate"] = daily_card_wr.index.get_level_values('card').map(card_wr)
-    daily_card_wr["lift"] = daily_card_wr["daily_winrate"] - daily_card_wr["winrate"]
-
-    y = np.nan_to_num(daily_player_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
-    X = np.nan_to_num(daily_card_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
-    return LinearRegression().fit(X, y)
 
 class FixedEffectsAssessor(AbstractAssessor):
-    """Uses a Fixed Effects Model (in order to normalize the card winrate)
+    """Uses a Fixed Effects Model in order to normalize the card winrate accounting for player skill.
         On top of that, gives an advantage to colors which are already in the card pool"""
-    def __init__(self, cube, card_pool, removed, color_num=1, alpha=1, relevant_digits=3):
+    def __init__(self, cube, card_pool, removed, color_num:float=1, alpha:float=1, relevant_digits=3):
         super().__init__(cube, card_pool, removed)
 
         self.color_num = color_num
@@ -184,7 +213,7 @@ class FixedEffectsAssessor(AbstractAssessor):
 
         df = decks.merge(games, on=["date", "player"])
 
-        model = fixed_effects_model(df, alpha)
+        model = fe_model(df, alpha)
 
         # count = extract_deck_count(decks)
 
@@ -207,11 +236,11 @@ class FixedEffectsAssessor(AbstractAssessor):
 
 
 class FixedEffectsParettoFrontAssessor(AbstractAssessor):
-    """Uses a Fixed Effects Model (in order to normalize the card winrate)
-        and Paretto Fronts (the criteria are the amount of decks a card has been played in and card winrate)
+    """Uses a Fixed Effects Model in order to normalize the card winrate accounting for player skill.
+        Also uses Paretto Fronts (the criteria are the amount of decks a card has been played in and normalized card winrate)
         to divide the cards into tiers.
         On top of that, gives an advantage to colors which are already in the card pool"""
-    def __init__(self, cube, card_pool, removed, color_num=1, alpha=1):
+    def __init__(self, cube, card_pool, removed, color_num:float=1, alpha:float=1):
         super().__init__(cube, card_pool, removed)
 
         self.color_num = color_num
@@ -220,7 +249,7 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
 
         df = decks.merge(games, on=["date", "player"])
 
-        model = fixed_effects_model(df, alpha)
+        model = fe_model(df, alpha)
 
         count = extract_deck_count(decks)
 
@@ -237,13 +266,16 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
         self.fronts = paretto_fronts.divide_into_fronts(card_stats)
 
     def result_string(self, cardname):
-        return static_form_basic_text(static_calculate_card_score(self, cardname), add_color_bonus(self, cardname, self.color_num))
+        return static_form_basic_text(static_calculate_pareto_card_score(self, cardname), add_color_bonus(self, cardname, self.color_num))
 
     def calculate_card_score(self, cardname):
-        return static_calculate_card_score(self, cardname) + add_color_bonus(self, cardname, self.color_num)
+        return static_calculate_pareto_card_score(self, cardname) + add_color_bonus(self, cardname, self.color_num)
 
 
 class SimpleMetricEmbeddingAssessor(AbstractAssessor):
+    """
+    Uses trained metric embeddings of cards in order to evaluate the distance between the considered and drafted cards
+    """
     def __init__(self, cube, card_pool, removed, num_closest_cards=3):
         # maybe remove hardcoded embedding_dim and input_dim - problem is having to train it when starting...
         super().__init__(cube, card_pool, removed)
@@ -344,6 +376,9 @@ class SimpleMetricEmbeddingAssessor(AbstractAssessor):
 
 
 class MetricEmbeddingAssessorClosest(SimpleMetricEmbeddingAssessor):
+    """
+    Works the same as the SimpleMetricEmbeddingAssessor except for it uses the distance to the closest card in the card pool instead of the average distance
+    """
     def __init__(self, cube, card_pool, removed, num_closest_cards=3):
         super().__init__(cube, card_pool, removed, num_closest_cards)
 
@@ -374,6 +409,9 @@ class MetricEmbeddingAssessorClosest(SimpleMetricEmbeddingAssessor):
 
 
 class CompositeAssessor(AbstractAssessor):
+    """
+    Uses several asessors at once. Cannot calculate card score since it cannot specify how to prioritize assessors. Provides ability to easily show the output of several assessors
+    """
     def __init__(self, cube, card_pool, removed, assessors: {}):
         super().__init__(cube, card_pool, removed)
 
@@ -389,7 +427,7 @@ class CompositeAssessor(AbstractAssessor):
         raise NotImplementedError
 
 
-# removed due to circular imports (Window from display_classes)
+# removed due to circular imports
 # if __name__ == '__main__':
 #     cube = pd.read_csv('./alahamaretov_arhiv/cube.csv',
 #                        usecols=['name', 'CMC', 'Type', 'Color'],

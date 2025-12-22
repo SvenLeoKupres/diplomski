@@ -5,41 +5,8 @@ import pandas as pd
 from assessor_classes import BasicAssessor, ParettoFrontAssessor, FixedEffectsAssessor, \
     FixedEffectsParettoFrontAssessor, SimpleMetricEmbeddingAssessor
 from card_pool import CardPool
+from cardpack_builder import TextBuilder, load_pack, save_pack
 
-
-class TextBuilder:
-    def __init__(self, num_players, num_rounds, card_pool, num_cards_per_pack=15):
-        self.num_players = num_players
-        self.num_rounds = num_rounds
-        self.card_pool = card_pool
-        self.removed = removed
-        self.num_cards_per_pack = num_cards_per_pack
-        self.card_pool.add_change_listener(self.update_card_pool)
-        self.text = ""
-
-    def update_card_pool(self):
-        self.text += f"{self.card_pool.cards[-1]}\n"
-
-    def save(self, path='./evaluation/draft'):
-        with open(path, 'w') as f:
-            f.write(self.text)
-
-
-def save_pack(packs, num_players, num_rounds, num_cards_per_pack, path='./packs'):
-    data = f"{num_players};{num_rounds};{num_cards_per_pack};{packs[0]}"
-    for index in range(1, len(packs)):
-        data += f";{packs[index]}"
-    with open(path, 'w') as f:
-        f.write(data)
-
-def load_pack(path = './packs'):
-    try:
-        with open(path, 'r') as f:
-            packs = f.read()
-            data = packs.split(";")
-            return int(data[0]), int(data[1]), int(data[2]), data[3:]
-    except FileNotFoundError:
-        raise FileNotFoundError("File doesn't exist")
 
 def load_draft(path='./draft'):
     with open(path, 'r') as f:
@@ -75,13 +42,13 @@ class Environment:
         self.pool = card_pool
         self.removed = removed
         if mode == "load file":
-            self.num_players, self.num_rounds, self.num_cards_per_pack, shuffled_packs = load_pack(f"../old_drafts/packs{draft_num}")
+            self.num_players, self.num_rounds, self.num_cards_per_pack, shuffled_packs = load_pack(f"./old_drafts/packs{draft_num}")
         else:
             shuffled_packs = cube.index.tolist()
             shuffled_packs = random.sample(shuffled_packs, num_cards_per_pack * num_players * num_rounds)
 
             if save:
-                save_pack(shuffled_packs, self.num_players, self.num_rounds, self.num_cards_per_pack)
+                save_pack(shuffled_packs, self.num_players, self.num_rounds, self.num_cards_per_pack, f"./old_drafts/packs{draft_num}")
 
         self.packs = [[[shuffled_packs[k * num_cards_per_pack * num_players + i * num_cards_per_pack + j] for j in range(num_cards_per_pack - i)] for i in range(num_players)] for k in range(num_rounds)]
 
@@ -89,7 +56,7 @@ class Environment:
         self.current_pack = 0
         self.current_pick = 0
 
-        player, other_players = load_draft(f"../old_drafts/draft{draft_num}")
+        player, other_players = load_draft(f"./old_drafts/draft{draft_num}")
         self.player = []
         self.other_players = []
         for k in range(self.num_rounds):
@@ -139,7 +106,7 @@ class Environment:
             if self.current_round == self.num_rounds - 1:
                 self.done = True
                 if self.save:
-                    self.text_builder.save()
+                    self.text_builder.save("./evaluation/draft")
                 raise StopIteration
             self.current_round += 1
             self.current_pack = 0

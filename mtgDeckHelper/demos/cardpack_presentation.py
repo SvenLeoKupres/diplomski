@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
             img = None
             try:
-                img = Image.open(f'card_images/{cardname.replace(" ", "_").replace("//", "")}.png')
+                img = Image.open(f'../card_images/{cardname.replace(" ", "_").replace("//", "")}.png')
                 # img = mpimg.imread(f'card_images/{cardname.replace(" ", "_")}.png')
                 # img = Image.fromarray(img)
             except FileNotFoundError as e:

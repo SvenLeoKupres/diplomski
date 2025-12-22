@@ -5,20 +5,20 @@ from card_pool import CardPool
 import queue
 
 def load_data():
-    cube = pd.read_csv('./alahamaretov_arhiv/cube.csv',
+    cube = pd.read_csv('../alahamaretov_arhiv/cube.csv',
                        usecols=['name', 'CMC', 'Type', 'Color'],
                        dtype={'name': 'str', 'CMC': 'int', 'Type': 'str', 'Color': 'str'})
     cube = cube.rename(columns={"name": "card", "CMC": "cmc", "Type": "type", "Color": "color"})
     cube.set_index('card', inplace=True)
 
-    decks = pd.read_excel(io='./alahamaretov_arhiv/shoebox.xlsx',
+    decks = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
                           sheet_name='Decks',
                           usecols=['date', 'player', 'card'],
                           dtype={'date': 'datetime64[ns]', 'player': 'str', 'card': 'str'})
     decks.date = decks.date.apply(lambda x: x.date())
     decks.set_index(['date', 'player'], inplace=True)
 
-    games = pd.read_excel(io='./alahamaretov_arhiv/shoebox.xlsx',
+    games = pd.read_excel(io='../alahamaretov_arhiv/shoebox.xlsx',
                           sheet_name='Games',
                           usecols=['date', 'player', 'opponent', 'wins', 'losses'],
                           dtype={'date': 'datetime64[ns]', 'player': 'str', 'opponent': 'str', 'wins': 'int',

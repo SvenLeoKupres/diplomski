@@ -1,58 +1,94 @@
 import tkinter as tk
-from display_classes import CardSelector
+from typing import Callable
+
+from card_selector import CardSelector
 from pack import Pack, FilledPack
 
-
-def switch_pack(window):
-    # if pack is still not filled, do nothing
-    if not window.packs[window.selected_pack].is_full():
-        return
-
-    if window.packs[window.selected_pack].is_removing():
-        window.num_to_remove -= 1
-        if window.num_to_remove == 0:
-            window.packs[window.selected_pack].toggle_removing()
-            window.num_to_remove = window.num_players - 1
-            if window.packs[window.selected_pack].is_empty():
-                window.reset_round()
-        return
-
-    window.packs[window.selected_pack].pack_forget()
-    window.selected_pack = (window.selected_pack + 1) % len(window.packs)
-
-    # if new pack is empty, round is done
-    if window.packs[window.selected_pack].is_empty() and window.packs[window.selected_pack].is_full():
-        window.reset_round()
-        return
-
-    window.packs[window.selected_pack].pack()
-    if window.packs[window.selected_pack].is_full() and window.num_to_remove > 0 and (len(window.card_pool)%15>=window.num_players or len(window.card_pool)%15==0):
-        window.packs[window.selected_pack].toggle_removing()
-        # self.packs[self.selected_pack].update_scores(self.assessor)
-
-    # set off listeners which track when there was an update in a pack
-    window.packs[window.selected_pack].listen_load()
-
-
-class Window(tk.Tk):
-    def __init__(self, available_cards, num_players, card_pool, removed_cards, assessor, singleton=False, num_rounds=3, *args, **kwargs):
+class AbstractWindow(tk.Tk):
+    """
+    Basis for a main window. Supports no functionality by itself.
+    """
+    def __init__(self, num_players, card_pool, removed_cards, assessor, num_rounds=3, num_cards_per_pack=15, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.num_rounds = num_rounds
-        self.singleton = singleton
-        self.assessor = assessor  # the thing that decides card scores
-
-        self.available_cards = available_cards
-
-        self.num_to_remove = num_players-1    # to count how many cards need to be removed before adding a new card to the card pool
-
         self.num_players = num_players
-
         self.card_pool = card_pool
         self.removed_cards = removed_cards
+        self.assessor = assessor
+        self.num_rounds = num_rounds
+        self.num_cards_per_pack = num_cards_per_pack
+
+        self.packs = []
+        self.selected_pack = 0
+        self.num_to_remove = num_players - 1    # to count how many cards need to be removed before adding a new card to the card pool
+
+    def add_button_listener(self, func: Callable[[], None]) -> None:
+        """Add a listener to each button in the card pack
+        :param func: Function to call on each button. Requires no inputs and returns nothing"""
+        for k in self.packs:
+            k.add_listener_to_all_buttons(func)
+
+    def get_pack_data(self) -> []:
+        """Return data about all the cards currently present in all the card packs"""
+        pack_data = []
+        for pack in self.packs:
+            pack_data.append(pack.get_data())
+
+    def reset_round(self) -> None:
+        """
+        If there are more rounds to be played, creates a new environment to continue. Otherwise, destroys the window
+        """
+        self.destroy()
+        if self.num_rounds == 1:
+            return
+
+    def switch_pack(self) -> None:
+        """
+        Switch pack and update any necessary visuals
+        """
+        # if pack is still not filled, do nothing
+        if not self.packs[self.selected_pack].is_full():
+            return
+
+        if self.packs[self.selected_pack].is_removing():
+            self.num_to_remove -= 1
+            if self.num_to_remove == 0:
+                self.packs[self.selected_pack].toggle_removing()
+                self.num_to_remove = self.num_players - 1
+                if self.packs[self.selected_pack].is_empty():
+                    self.reset_round()
+            return
+
+        self.packs[self.selected_pack].pack_forget()
+        self.selected_pack = (self.selected_pack + 1) % len(self.packs)
+
+        # if new pack is empty, round is done
+        if self.packs[self.selected_pack].is_empty() and self.packs[self.selected_pack].is_full():
+            self.reset_round()
+            return
+
+        self.packs[self.selected_pack].pack()
+        if self.packs[self.selected_pack].is_full() and self.num_to_remove > 0 and (
+                len(self.card_pool) % 15 >= self.num_players or len(self.card_pool) % 15 == 0):
+            self.packs[self.selected_pack].toggle_removing()
+            # self.packs[self.selected_pack].update_scores(self.assessor)
+
+        # set off listeners which track when there was an update in a pack
+        self.packs[self.selected_pack].listen_load()
+
+
+class ProperWindow(AbstractWindow):
+    """
+    Window to use when actually drafting during a game. User is able to manually add cards to the selected pack.
+    """
+    def __init__(self, available_cards, num_players, card_pool, removed_cards, assessor, singleton=False, num_rounds=3, num_cards_per_pack=15, *args, **kwargs):
+        super().__init__(num_players, card_pool, removed_cards, assessor, num_rounds, num_cards_per_pack, *args, **kwargs)
+
+        self.singleton = singleton
+        self.available_cards = available_cards
 
         self.packs = [Pack(self, 15-k, card_pool, removed_cards, self.assessor) for k in range(num_players)]
-        self.add_button_listener(lambda: switch_pack(self))
+        self.add_button_listener(lambda: self.switch_pack())
 
         self.selected_pack = 0
 
@@ -68,12 +104,10 @@ class Window(tk.Tk):
         self.packs[self.selected_pack].listen_load()
 
     def add_button_listener(self, func):
-        """Add a listener to each button in the card pack"""
         for k in self.packs:
             k.add_listener_to_all_buttons(func)
 
     def get_pack_data(self):
-        """Return data about all the cards currently present in all the card packs"""
         pack_data = []
         for pack in self.packs:
             pack_data.append(pack.get_data())
@@ -85,34 +119,29 @@ class Window(tk.Tk):
         if self.num_rounds == 1:
             return
 
-        new_window = Window(self.available_cards, self.num_players, self.card_pool, self.removed_cards, self.assessor, self.singleton, self.num_rounds-1)
+        new_window = ProperWindow(self.available_cards, self.num_players, self.card_pool, self.removed_cards, self.assessor, self.singleton, self.num_rounds - 1, self.num_cards_per_pack)
         new_window.mainloop()
 
 
-class PreconstructedWindow(tk.Tk):
-    def __init__(self, order_cards: [], num_players, card_pool, removed_cards, assessor, num_rounds=3, num_cards=15, listeners:[]=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class PreconstructedWindow(AbstractWindow):
+    """
+    User must give a preselected card order for the packs. The length of the list must be equal to num_players*num_rounds*num_cards_per_pack.
+    """
+    def __init__(self, order_cards: [], num_players, card_pool, removed_cards, assessor, num_rounds=3, num_cards_per_pack=15, listeners:[]=None, *args, **kwargs):
+        super().__init__(num_players, card_pool, removed_cards, assessor, num_rounds, num_cards_per_pack, *args, **kwargs)
 
-        self.num_rounds = num_rounds
-        self.num_cards = num_cards
-        self.assessor = assessor  # the thing that decides card scores
-
-        self.num_to_remove = num_players-1    # to count how many cards need to be removed before adding a new card to the card pool
-
-        self.num_players = num_players
-
-        self.card_pool = card_pool
-        self.removed_cards = removed_cards
+        if len(order_cards) != num_players*num_rounds*num_cards_per_pack:
+            raise ValueError("inappropriate length of list")
 
         self.order_cards = order_cards
 
-        self.packs = [FilledPack(self, order_cards[k*num_cards:(k+1)*num_cards-k], card_pool, removed_cards, self.assessor) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
+        self.packs = [FilledPack(self, order_cards[k*num_cards_per_pack:(k+1)*num_cards_per_pack-k], card_pool, removed_cards, self.assessor) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
         self.selected_pack = 0
 
         self.packs[self.selected_pack].pack()
 
         self.listeners = []
-        self.add_button_listener(lambda: switch_pack(self))
+        self.add_button_listener(lambda: self.switch_pack())
         # if listeners is not None:
         #     for listener in listeners:
         #         self.add_button_listener(listener)
@@ -122,13 +151,11 @@ class PreconstructedWindow(tk.Tk):
         self.packs[self.selected_pack].listen_load()
 
     def add_button_listener(self, func):
-        """Add a listener to each button in the card pack"""
         self.listeners.append(func)
         for k in self.packs:
             k.add_listener_to_all_buttons(func)
 
     def get_pack_data(self):
-        """Return data about all the cards currently present in all the card packs"""
         pack_data = []
         for pack in self.packs:
             pack_data.append(pack.get_data())
@@ -140,7 +167,7 @@ class PreconstructedWindow(tk.Tk):
         if self.num_rounds == 1:
             return
 
-        new_window = PreconstructedWindow(self.order_cards[self.num_cards*self.num_players:], self.num_players, self.card_pool, self.removed_cards, self.assessor, self.num_rounds-1, self.num_cards)
+        new_window = PreconstructedWindow(self.order_cards[self.num_cards_per_pack*self.num_players:], self.num_players, self.card_pool, self.removed_cards, self.assessor, self.num_rounds-1, self.num_cards_per_pack)
         for k in self.listeners[1:]:
             new_window.add_button_listener(k)
         new_window.mainloop()

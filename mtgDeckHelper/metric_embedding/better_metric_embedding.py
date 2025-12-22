@@ -1,6 +1,6 @@
 from random import choice
 
-import numpy as np
+import numpy as np 
 import pandas as pd
 import torch
 from torch import nn
@@ -13,26 +13,27 @@ from metric_embedding import load_data
 PRINT_LOSS_N = 10
 
 
-def remove_from_dummy_data(df, cube, count):
-    count = count - len(cube)
-
-    count_per_card = df.sum(axis=0).rename('count').sort_values(ascending=False)
-    # count_per_card = count_per_card[count_per_card.loc[:, 'card'] > threshold]
-    flags = ~count_per_card.index.isin(cube.index)
-    count_per_card = count_per_card[flags]
-    selected = count_per_card.head(max(0, count))
-
-    return df[selected.index.tolist() + cube.index.tolist()]
-
-
 class ContrastiveCardIndexEmbeddingDataset(Dataset):
-    def __init__(self, data, targets, *args, **kwargs):
+    """
+    Dataset which is used to generate batches and sample data combined with the card embedding network.
+    """
+    def __init__(self, data:torch.Tensor, targets:torch.Tensor, *args, **kwargs):
+        """
+
+        :param data: tensor. First dimension is the decks. Second dimension is the cards within the decks (1 if a card is present, 0 otherwise).
+        :param targets: Its one and only dimension is decks. Average winrate of each deck. Potentially could upgrade to include the number of games with a deck in order to calculate average win-rates with weights
+        """
         super().__init__(*args, **kwargs)
 
         self.data = data
         self.targets = targets
 
-    def _sample(self, index):
+    def _sample(self, index:int) -> (torch.Tensor, float):
+        """
+        Used to randomly sample a datapoint.
+        :param index: represents the index of the card in the second dimension of the dataset. That specific card is an anchor to sample the second card against
+        :return: one-hot representation of a sampled card, as well as the average winrate of all the decks which contain both the sampled card and the card represented by the index
+        """
         card = index
         while card==index:
             card = choice(range(self.data.shape[1]))
@@ -66,7 +67,10 @@ class ContrastiveCardIndexEmbeddingDataset(Dataset):
 
 
 class ContrastiveMetricEmbedding(nn.Module):
-    def __init__(self, card_num, emb_size=32, margin=0, *args, **kwargs):
+    """
+    A neural network which uses the contrastive loss function to train a metric embedding representation of cards
+    """
+    def __init__(self, card_num, emb_size=32, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.emb_size = emb_size
         self.card_num = card_num
@@ -77,14 +81,31 @@ class ContrastiveMetricEmbedding(nn.Module):
                                     nn.Linear(self.card_num//2, emb_size))
         self.requires_grad_(True)
 
-    def forward(self, data):
+    def forward(self, data:torch.Tensor) -> torch.Tensor:
+        """
+        A pass through the neural network
+        :param data: tensor with dimensions BATCH_SIZE x CARD_NUM
+        :return: tensor with dimensions BATCH_SIZE x EMB_SIZE
+        """
         return self.layers(data)
 
-    def get_features(self, data):
-        # Returns tensor with dimensions BATCH_SIZE, EMB_SIZE
+    def get_features(self, data:torch.Tensor) -> torch.Tensor:
+        """
+        Same as the forward method. Used for training
+        :param data: tensor with dimensions BATCH_SIZE x CARD_NUM
+        :return: tensor with dimensions BATCH_SIZE x EMB_SIZE
+        """
+        # Returns tensor with dimensions BATCH_SIZE x EMB_SIZE
         return self.forward(data)
 
-    def loss(self, x_1, x_2, y):
+    def loss(self, x_1:torch.Tensor, x_2:torch.Tensor, y:torch.Tensor) -> torch.Tensor:
+        """
+        Calculates contrastive loss for a batch
+        :param x_1: tensor with dimensions BATCH_SIZE x CARD_NUM
+        :param x_2: tensor with dimensions BATCH_SIZE x CARD_NUM
+        :param y: tensor with dimensions BATCH_SIZE, win-rates of card pairs (tensors x_1 and x_2)
+        :return: average contrastive loss for a batch
+        """
         x_1 = self.get_features(x_1)
         x_2 = self.get_features(x_2)
 

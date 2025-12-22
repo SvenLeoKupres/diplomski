@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 
 import paretto_fronts
+from demos.fixed_effects_model import fe_model
 
 
 def smooth_winrate(alpha=0):
@@ -68,6 +69,7 @@ if __name__=='__main__':
 
     y = np.nan_to_num(daily_player_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
     X = np.nan_to_num(daily_card_wr.loc[:, "lift"].unstack().to_numpy(), nan=0)
+
     # y = y.sum(axis=0).reshape(-1, 1)
     # X = X.sum(axis=0).reshape(-1, 1)
     model = LinearRegression().fit(X, y)
