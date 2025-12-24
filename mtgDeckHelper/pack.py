@@ -11,28 +11,12 @@ from requests import get
 from json import loads
 from shutil import copyfileobj
 
-#TODO move this hard-coded window specification into the window
-height = 1000
-width = 1300
-
-col_size = 5
-row_size = 3
-images = []
-
-# numbers acquired by checking the scryfall png image resolution
-img_height = 1040
-img_width = 745
-
-frame_height = int(height / row_size)
-frame_width = int(width / col_size)
-
-new_height = frame_height
-new_width = int(img_width * (frame_height / img_height))
-
-def get_card_image(cardname:str, save:bool=True) -> ImageTk.PhotoImage:
+def get_card_image(cardname:str, card_height:int, card_width:int, save:bool=True) -> ImageTk.PhotoImage:
     """
     Returns the image of the given card using the scryfall API. If card has multiple versions, returns the newest one
     :param cardname: Name of the card
+    :param card_height: height of the card image to fit into the pack
+    :param card_width: width of the card image to fit into the pack
     :param save: Whether to save the image (if image of that name doesn't already exist), default true
     :return: Tk PhotoImage
     """
@@ -62,13 +46,11 @@ def get_card_image(cardname:str, save:bool=True) -> ImageTk.PhotoImage:
             with open(f'./card_images/{cardname.replace(" ", "_").replace("//", "")}.png', 'wb') as out_file:
                  copyfileobj(get(img_url, stream=True).raw, out_file)
 
-    img = img.resize((new_height, new_width), Image.Resampling.LANCZOS)
+    img = img.resize((card_height, card_width), Image.Resampling.LANCZOS)
 
     return ImageTk.PhotoImage(img)
 
-#TODO calculate the number of rows and columns per number of cards per pack. Can also be done by the window so as to not be done multiple times
-# but it shouldn't make that much of a difference and the pack should control its layout anyways. Currently the column and row size are hard-coded,
-# and that can become a problem for larger packs
+
 class Pack(ttk.Frame):
     """
     Models a single pack of cards
@@ -105,6 +87,21 @@ class Pack(ttk.Frame):
         self.listeners.append(self._set_best_card)
         self.pack_load_listeners = []
         self.pack_load_listeners.append(self._set_best_card)
+
+        # would like to have a more dynamic way to adjust window size, but can't be bothered right now. Important that this is not defined globally at least
+        # important to just set height, width will be adjusted to proper proportions
+        height = 1000
+        # width = 1300
+
+        # numbers acquired by checking the scryfall png image resolution
+        img_height = 1040
+        img_width = 745
+
+        frame_height = int(height / row_size)
+        # frame_width = int(width / col_size)
+
+        self.new_height = frame_height
+        self.new_width = int(img_width * (frame_height / img_height))
 
     def is_full(self) -> bool:
         """
@@ -150,7 +147,7 @@ class Pack(ttk.Frame):
             # self.listen_load()
             return
 
-        img = get_card_image(cardname)
+        img = get_card_image(cardname, self.new_height, self.new_width)
         if img is None:
             return
 

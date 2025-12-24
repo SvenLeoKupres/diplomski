@@ -246,7 +246,6 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
         self.color_num = color_num
 
         decks, games = loadDataFromFiles()
-
         df = decks.merge(games, on=["date", "player"])
 
         model = fe_model(df, alpha)
@@ -270,6 +269,26 @@ class FixedEffectsParettoFrontAssessor(AbstractAssessor):
 
     def calculate_card_score(self, cardname):
         return static_calculate_pareto_card_score(self, cardname) + add_color_bonus(self, cardname, self.color_num)
+
+
+class AverageDeckCMCAssessor(AbstractAssessor):
+    #TODO train an assessor that averages deck cmc, and then trains a linear regression model with deck winrates as the target.
+    # Assessor will work so that it wants the created deck to be as close to the best average deck CMC as possible
+    def __init__(self, cube, card_pool, removed, color_num:float=1):
+        super().__init__(cube, card_pool, removed)
+
+        self.color_num = color_num
+
+        decks, games = loadDataFromFiles()
+        df = decks.merge(games, on=["date", "player"])
+
+    def result_string(self, cardname):
+        pass
+
+    def calculate_card_score(self, cardname):
+        pass
+
+
 
 
 class SimpleMetricEmbeddingAssessor(AbstractAssessor):

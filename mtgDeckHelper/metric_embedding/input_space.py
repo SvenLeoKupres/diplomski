@@ -4,48 +4,59 @@ from metric_embedding import load_data
 
 import numpy as np
 
+import torch
+from torch.nn.functional import one_hot
+
 
 class InputSpace:
     """
-    A way to transform the inputs so as not to just be one-hot encoded, in order to shrink it
+    A way to transform the inputs (so they do not have to be just one-hot encoded), in order to shrink it
     """
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, size:int):
+        """
+        :param size: size of the vector needed
+        """
+        self.size = size
 
-    def transform(self):
+    def transform(self, index:int) -> torch.Tensor:
+        """
+        performs the transformation
+        :param index: index of the card
+        :return: a tensor of size (size)
+        """
         raise NotImplementedError
 
-    def input_size(self):
-        raise NotImplementedError
+    def __len__(self) -> int:
+        """
+        :return: size (dimension) of the input space
+        """
+        return self.size
 
 class OneHotInputSpace(InputSpace):
     """
-    Does nothing
+    Transforms a card into a one-hot encoded tensor
     """
-    def __init__(self, data):
-        super().__init__(data)
+    def __init__(self, size):
+        super().__init__(size)
 
-    def transform(self):
-        pass
-
-    def input_size(self):
-        return len(self.data)
+    def transform(self, index):
+        return one_hot(torch.Tensor([index]).to(torch.int64), num_classes=self.size)[0].to(torch.float32)
 
 class BinaryInputSpace(InputSpace):
     """
-    Transforms from one-hot encoded data to binary encoded data.
-    For instance, 10000 (fifth bit is 1, all others 0) would be transformed into 101 (5 in binary)
+    Transforms data to binary encoded data.
+    For instance, 10000 (fifth bit is 1, all others 0) would be transformed into 101 (5 in binary), with padding to satisfy the "size" input
     """
-    def __init__(self, data):
-        super().__init__(data)
+    def __init__(self, size):
+        super().__init__(np.log2(size))
+        if self.size%1>0:
+            self.size = int(self.size+1)
+        else:
+            self.size = int(self.size)
 
-    def transform(self):
-        #TODO
-        pass
-
-    def input_size(self):
-        #TODO
-        return len(self.data)
+    def transform(self, index):
+        binary = bin(k)[2:].zfill(length)
+        return torch.Tensor(binary).to(torch.float32)
 
 if __name__=='__main__':
     cube, decks, games = load_data()

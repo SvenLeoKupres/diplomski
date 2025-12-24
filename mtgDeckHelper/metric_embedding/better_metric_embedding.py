@@ -5,10 +5,10 @@ import pandas as pd
 import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
-from torch.nn.functional import one_hot
 from torch.nn.utils import clip_grad_norm_
 
 from metric_embedding import load_data
+from input_space import InputSpace, OneHotInputSpace, BinaryInputSpace
 
 PRINT_LOSS_N = 10
 
@@ -17,7 +17,7 @@ class ContrastiveCardIndexEmbeddingDataset(Dataset):
     """
     Dataset which is used to generate batches and sample data combined with the card embedding network.
     """
-    def __init__(self, data:torch.Tensor, targets:torch.Tensor, *args, **kwargs):
+    def __init__(self, data:torch.Tensor, targets:torch.Tensor, input_space:InputSpace=None, *args, **kwargs):
         """
 
         :param data: tensor. First dimension is the decks. Second dimension is the cards within the decks (1 if a card is present, 0 otherwise).
@@ -28,9 +28,13 @@ class ContrastiveCardIndexEmbeddingDataset(Dataset):
         self.data = data
         self.targets = targets
 
+        if input_space is None:
+            self.input_space = OneHotInputSpace(self.data.shape[1])
+        self.input_space = input_space
+
     def _sample(self, index:int) -> (torch.Tensor, float):
         """
-        Used to randomly sample a datapoint.
+        Used to randomly sample a datapoint. Maybe should make it be able to control the chance of accepting a card which has not appeared with the input card in a deck
         :param index: represents the index of the card in the second dimension of the dataset. That specific card is an anchor to sample the second card against
         :return: one-hot representation of a sampled card, as well as the average winrate of all the decks which contain both the sampled card and the card represented by the index
         """
@@ -43,7 +47,7 @@ class ContrastiveCardIndexEmbeddingDataset(Dataset):
 
         deck_range = deck_range_2 * deck_range_1
 
-        encoded = one_hot(torch.Tensor([card]).to(torch.int64), num_classes=self.data.shape[1])[0].to(torch.float32)
+        encoded = self.input_space.transform(card)
         if sum(deck_range) == 0:
             return encoded, 0
 
@@ -52,11 +56,11 @@ class ContrastiveCardIndexEmbeddingDataset(Dataset):
         return encoded, winrate
 
     def __len__(self):
-        return self.data.shape[1]
+        return len(self.input_space)
 
     def __getitem__(self, index):
         """Indexes by card. Returns it and another random card"""
-        x1 = one_hot(torch.Tensor([index]).to(torch.int64), num_classes=self.data.shape[1])[0].to(torch.float32)
+        x1 = self.input_space.transform(index)
 
         # if self.data[:, index].sum() == 0:
         #     return x1, x1, 1
@@ -70,15 +74,15 @@ class ContrastiveMetricEmbedding(nn.Module):
     """
     A neural network which uses the contrastive loss function to train a metric embedding representation of cards
     """
-    def __init__(self, card_num, emb_size=32, *args, **kwargs):
+    def __init__(self, input_size, emb_size=32, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.emb_size = emb_size
-        self.card_num = card_num
+        self.input_size = input_size
 
-        self.layers = nn.Sequential(nn.Linear(self.card_num, self.card_num//2),
+        self.layers = nn.Sequential(nn.Linear(self.input_size, self.input_size//2),
                                     nn.ReLU(),
                                     # nn.Linear(self.card_num//2, self.card_num//2),
-                                    nn.Linear(self.card_num//2, emb_size))
+                                    nn.Linear(self.input_size//2, emb_size))
         self.requires_grad_(True)
 
     def forward(self, data:torch.Tensor) -> torch.Tensor:
@@ -170,9 +174,12 @@ if __name__ == '__main__':
 
     y = deck_winrates.to_numpy()
 
-    dataset = ContrastiveCardIndexEmbeddingDataset(torch.Tensor(X), torch.Tensor(y))
+    # input_space = OneHotInputSpace(X.shape[1])
+    input_space = BinaryInputSpace(X.shape[1])
+
+    dataset = ContrastiveCardIndexEmbeddingDataset(torch.Tensor(X), torch.Tensor(y), input_space)
     # print(dataset[0])
-    model = ContrastiveMetricEmbedding(len(dataset), 100)
+    model = ContrastiveMetricEmbedding(len(input_space), 100)
     try:
         model.load_state_dict(torch.load("./params.pt"))
     except FileNotFoundError:

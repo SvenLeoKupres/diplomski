@@ -1,8 +1,40 @@
 import tkinter as tk
-from typing import Callable
 
 from card_selector import CardSelector
 from pack import Pack, FilledPack
+
+
+def optimal_pack_dimensions(num_cards:int) -> (int, int):
+    """
+    Calculate the optimal number of rows and columns for the given number of cards per pack
+    :param num_cards: number of cards in the pack
+    :return: tuple, first number is the number of rows, second is the number of columns
+    """
+    # x * y = num_cards
+    # x = y+C, minimizirati C, tj minimizirati x-y
+    root = int(num_cards**0.5)
+    proper = []
+    for i in range(1, root+1):
+        for j in range(i, num_cards+1):
+            if i*j == num_cards:
+                proper.append((i,j))
+
+    k = 0
+    best = k
+    while k<len(proper):
+        item = proper[k]
+        if item[1] > item[0] + 4:
+            proper.pop(k)
+        elif item[1]-item[0]<proper[best][1]-proper[best][0]:
+            proper.pop(best)
+        else:
+            k += 1
+
+    if len(proper)==0:
+        return optimal_pack_dimensions(num_cards+1)
+
+    return proper[0]
+
 
 class AbstractWindow(tk.Tk):
     """
@@ -17,19 +49,23 @@ class AbstractWindow(tk.Tk):
         self.assessor = assessor
         self.num_rounds = num_rounds
         self.num_cards_per_pack = num_cards_per_pack
+        self.row_size, self.col_size = optimal_pack_dimensions(self.num_cards_per_pack)
 
         self.packs = []
         self.selected_pack = 0
         self.num_to_remove = num_players - 1    # to count how many cards need to be removed before adding a new card to the card pool
 
-    def add_button_listener(self, func: Callable[[], None]) -> None:
-        """Add a listener to each button in the card pack
+    def add_button_listener(self, func: callable) -> None:
+        """
+        Add a listener to each button in the card pack
         :param func: Function to call on each button. Requires no inputs and returns nothing"""
         for k in self.packs:
             k.add_listener_to_all_buttons(func)
 
     def get_pack_data(self) -> []:
-        """Return data about all the cards currently present in all the card packs"""
+        """
+        :return: data about all the cards currently present in all the card packs
+        """
         pack_data = []
         for pack in self.packs:
             pack_data.append(pack.get_data())
@@ -69,7 +105,7 @@ class AbstractWindow(tk.Tk):
 
         self.packs[self.selected_pack].pack()
         if self.packs[self.selected_pack].is_full() and self.num_to_remove > 0 and (
-                len(self.card_pool) % 15 >= self.num_players or len(self.card_pool) % 15 == 0):
+                len(self.card_pool) % self.num_cards_per_pack >= self.num_players or len(self.card_pool) % self.num_cards_per_pack == 0):
             self.packs[self.selected_pack].toggle_removing()
             # self.packs[self.selected_pack].update_scores(self.assessor)
 
@@ -87,7 +123,7 @@ class ProperWindow(AbstractWindow):
         self.singleton = singleton
         self.available_cards = available_cards
 
-        self.packs = [Pack(self, 15-k, card_pool, removed_cards, self.assessor) for k in range(num_players)]
+        self.packs = [Pack(self, num_cards_per_pack-k, card_pool, removed_cards, self.assessor, col_size=self.col_size, row_size=self.row_size) for k in range(num_players)]
         self.add_button_listener(lambda: self.switch_pack())
 
         self.selected_pack = 0
@@ -135,7 +171,7 @@ class PreconstructedWindow(AbstractWindow):
 
         self.order_cards = order_cards
 
-        self.packs = [FilledPack(self, order_cards[k*num_cards_per_pack:(k+1)*num_cards_per_pack-k], card_pool, removed_cards, self.assessor) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
+        self.packs = [FilledPack(self, order_cards[k*num_cards_per_pack:(k+1)*num_cards_per_pack-k], card_pool, removed_cards, self.assessor, row_size=self.row_size, col_size=self.col_size) for k in range(num_players)]  # "-k" at the second part of the slide removes the last couple of cards from the pack
         self.selected_pack = 0
 
         self.packs[self.selected_pack].pack()
@@ -171,3 +207,8 @@ class PreconstructedWindow(AbstractWindow):
         for k in self.listeners[1:]:
             new_window.add_button_listener(k)
         new_window.mainloop()
+
+
+if __name__=="__main__":
+    for k in range(1, 21):
+        print(f"{k}: {optimal_pack_dimensions(k)}")
